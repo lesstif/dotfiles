@@ -1,0 +1,62 @@
+############  Individual readline initialization file
+## ref - https://github.com/mathiasbynens/dotfiles/blob/master/.inputrc 
+
+# Make up and down scroll through history entries prefixed with entered text.
+# Ex: history contains (ls,pwd,echo "foo",ps aux)
+# type: p(UP) --> scrolls through "ps aux" and "pwd", skips echo and ls.
+# Use ctrl-P and ctrl-N to walk through history the default way.
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+
+# Make it show more useful info.
+set completion-ignore-case on
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Ctrl-E to open the editor, either in rlwrap or other readline-enabled apps.
+#"\C-e": edit-and-execute-command
+#"\C-e": rlwrap_call_editor
+# Space: magic-space
+
+## For Multibyte charter
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set meta-flag on
+set convert-meta off
+set output-meta on
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
+
+# Show all autocomplete results at once
+set page-completions off
+
+# If there are more than 200 possible completions for a word, ask to show them all
+set completion-query-items 200
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Use Alt/Meta + Delete to delete the preceding word
+"\e[3;3~": kill-word
+
+#set bell-style none
+#set prefer-visible-bell
+### Key mapping setting
+##"\e[1~" beginning-of-line # Home
+##"\e[2~" overwrite-mode    # Ins
+##"\e[3~" delete-char       # Del 
+##"\e[4~" end-of-line       # End
