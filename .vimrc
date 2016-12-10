@@ -66,6 +66,7 @@ if &term=="xterm"
   set t_ABet t_AF==se use this as to not annoy cow-orkers in the same room.
 "       Thankyou!  :-)
   set   t_vb=
+endif
 
 " ABbreviations
 " Abbreviations for some important numbers:
