@@ -5,7 +5,8 @@
 "   Windows : $VIM\_vimrc
 " Use the Solarized Dark theme
 set background=dark
-colorscheme solarized
+
+"colorscheme solarized
 let g:solarized_termtrans=1
 
 
@@ -112,10 +113,11 @@ cnoremap <ESC><C-H> <C-W>
 map <C-F9> :make
 map <F5> :!aaa
 "map &|/**/
-n CC()
-let file=buffer_name(1)
-let cmd="cc "  . file
-return cmd
+
+function CC()
+	let file=buffer_name(1)
+	let cmd="cc "  . file
+	return cmd
 endfunction
 
 augroup cprog
