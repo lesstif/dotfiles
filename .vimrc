@@ -1,37 +1,37 @@
-" KwangSeob's vimrc
-" $Header: /export/home/lesstif/.vimrc,v 1.1 1999-7-13 16:11:24+09 lesstif Exp $
+" Vim
+"
 " To use it, copy it to
-" 	for Unix :  ~/.vimrc
-"   Windows : $VIM\_vimrc
-" Use the Solarized Dark theme
-set background=dark
+"     for Unix and OS/2:  ~/.vimrc
+"             for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
-"colorscheme solarized
-let g:solarized_termtrans=1
+set nocompatible
+set langmenu=en_US.UTF-8
 
+if has("win32")
+    "set guifont=Gulimche:h12:cHANGEUL
+    set guifont=나눔고딕코딩:h12:cHANGEUL:qDEFAULT
+    set guifont=Source_Code_Pro:h12:cANSI:qDEFAULT
+    source $VIMRUNTIME/_gvimrc
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+else
+    " unix or mac
+    "set termencoding=utf-8
+    "set termencoding=euc-kr
+endif    
 
-if &t_Co > 2
-	syntax on
-endif
+set nohlsearch
+set encoding=utf-8
+set fileencodings=utf-8,cp949 "Default encoding is UTF8 and korea
 
-set  nohlsearch
-
-"Default encoding 
-set encoding=UTF-8
-set fileencoding=UTF-8
-set fileencodings=ucs-bom,UTF-8,cp949
-
-
-iab	3include #include
-iab 3inckude #include 
-cab sem set makeprg=cc\ -v\ -o\ #<\ %
-cab cpp so /usr/local/share/vim/vim57/syntax/cpp.vim
-set sw=4
-set incsearch
-set nowrapscan " 검색할 때 문서의 끝에서 다시 처음으로 돌아가지 않는다.
 set noerrorbells        " turn off beep bells
 set esckeys			" allow usage of cursor keys within insert mode
-"set highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
+set highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
 set ignorecase	" ignore the case in search patterns? NO!
 set noinsertmode	" start in normal mode
 set autoindent	" off as I usually do not write code.
@@ -51,29 +51,31 @@ set visualbell
 set magic
 set modeline
 set modelines=1
+" source $VIM/mswin.vim
 "set number
 set path=.,,~/.P/vim,~/.P/vim/syntax,~/.P/vim/source,$VIM/syntax/
 "set report=0
-set ruler  "화면 우측 하단에 현재 커서의 위치(줄,칸)를 보여준다.
+set ruler
 set showcmd	" Show current uncompleted command
 set showmatch
 set showmode
 set nostartofline
-set tabstop=4
 
 " Set the colors for vim on "xterm"
 if &term=="xterm"
-  set t_Co=32
-  set t_ABet t_AF==se use this as to not annoy cow-orkers in the same room.
+  set t_Co=8
+  set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
+  set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
+endif
+"       t_vb:  terminal's visual bell - turned off to make Vim quiet!
+"       Please use this as to not annoy cow-orkers in the same room.
 "       Thankyou!  :-)
   set   t_vb=
-endif
 
 " ABbreviations
 " Abbreviations for some important numbers:
-  iab YDesc /* <<프로그램 DESCRIPTION>> <C-J><C-J><Left> 프로그램명 : <C-J><Left>프로그램 구분 : <C-J> 작성자 : <C-J> 프로그램 개요: <C-J> */ <Up><Up><Up><Up><Up><Up>
   iab YLog /* <C-J> $Log:$ <C-J> */
-  iab YId #ifndef lint <C-J> static const char cvsid[] = "$Id:$"; <C-J> <Left><Left>#endif
+  iab YId  #ifdef RCSID <C-J> static const char rcsid[] = "$Id:$"; <C-J> <Left><Left>#endif
   iab Ypi 3.1415926535897932384626433832795028841972
   iab Ye  2.7182818284590452353602874713526624977573
   iab Yalpha abcdefghijklmnopqrstuvwxyz
@@ -86,14 +88,13 @@ endif
   iab seperate separate
   iab teh the
   iab Ytime <C-R>=strftime("%H:%M")<CR>
-  iab YDate <C-R>=strftime("%H:%M")<CR>
-  iab Ydate <C-R>=strftime("%H:%M")<CR>
 " Example: 14:28
 "
   iab YDATE   <C-R>=strftime("%y%m%d %T")<CR>
 " Example: 971027 12:00:00
 "
-  iab YDate <C-R>=strftime("%a %b %d %T %Z %Y")<CR>
+  iab Ydate <C-R>=strftime("%a %b %d %T %Z %Y")<CR>
+  iab CTime <C-R>=strftime("%Y %b %d %T ")<CR>
 " Example: Tue Dec 16 12:07:00 CET 1997
 "
 map Q gq
@@ -101,84 +102,71 @@ iab	inckude include
 iab swtich switch
 iab onclude include
 iab okclude include 
-cab init :e $HOME/.vimrc
+cab init :e $VIM/_vimrc
+cab cpp :source $VIMRUNTIME/syntax/cpp.vim
+cab html :source $VIMRUNTIME/syntax/html.vim
 
-" === Emacs Style Key mapping =======
-cnoremap <C-A> <Home>
-cnoremap <C-F> <Right>
-cnoremap <C-B> <Left>
-cnoremap <ESC>b <S-Left>
-cnoremap <ESC>f <S-Right>
-cnoremap <ESC><C-H> <C-W>
-map <C-F9> :make
-map <F5> :!aaa
-"map &|/**/
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-function CC()
-	let file=buffer_name(1)
-	let cmd="cc "  . file
-	return cmd
-endfunction
+" ### Vundule
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+ 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+ 
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+ 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
-augroup cprog
-  " Remove all cprog autocommands
-  au!
+Plugin 'tpope/vim-surround'
 
-  " When starting to edit a file:
-  "   For *.c and *.h files set formatting of comments and set C-indenting on.
-  "   For other files switch it off.
-  "   Don't change the order, it's important that the line with * comes first.
-  autocmd BufRead *       set formatoptions=tcql nocindent comments&
-  autocmd BufRead *.pc,*.c,*.C,*.cpp,*.i,*.cc,*.h set formatoptions=croql cindent comments=sr:/*,mb:*,el:*/,://
-  autocmd BufRead *.buf so $VIMRUNTIME/syntax/sql.vim
-  autocmd BufRead *.php3,*.php,*.inc  so $VIMRUNTIME/syntax/php.vim
-  autocmd BufRead *.java,*.jav set sw=2 ts=2 cindent autoindent 
-  autocmd BufRead *.wml so $VIMSUNTIME/syntax/wml.vim
-	
-augroup END
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/syntastic'
 
-" Java setting
-au BufNewFile,BufReadPost *.java set makeprg=jikes\ -nowarn\ -Xstdout\ +E\ %
-au BufNewFile,BufReadPost *.java set errorformat=%f:%l:%c:%*\\d:%*\\d:%*\\s%m 
+Plugin 'junegunn/vim-easy-align'
 
-augroup gzip
-  " Remove all gzip autocommands
-  au!
+syntax enable
+set background=dark
 
-  " Enable editing of gzipped files
-  "	  read:	set binary mode before reading the file
-  "		uncompress text in buffer after reading
-  "	 write:	compress file after writing
-  "	append:	uncompress file, append, compress file
-  autocmd BufReadPre,FileReadPre	*.gz set bin
-  autocmd BufReadPost,FileReadPost	*.gz '[,']!gunzip
-  autocmd BufReadPost,FileReadPost	*.gz set nobin
-  autocmd BufReadPost,FileReadPost	*.gz execute ":doautocmd BufReadPost " . expand("%:r")
+colorscheme solarized
 
-  autocmd BufWritePost,FileWritePost	*.gz !mv <afile> <afile>:r
-  autocmd BufWritePost,FileWritePost	*.gz !gzip <afile>:r
+if has("win32")
+    set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+endif   
 
-  autocmd FileAppendPre			*.gz !gunzip <afile>
-  autocmd FileAppendPre			*.gz !mv <afile>:r <afile>
-  autocmd FileAppendPost		*.gz !mv <afile> <afile>:r
-  autocmd FileAppendPost		*.gz !gzip <afile>:r
-augroup END
-
-augroup bz2
-  " Remove all bzip autocommands
-  au!
-
-  autocmd BufReadPre,FileReadPre	*.bz2 set bin
-  autocmd BufReadPost,FileReadPost	*.bz2 '[,']!bzip2 -d
-  autocmd BufReadPost,FileReadPost	*.bz2 set nobin
-  autocmd BufReadPost,FileReadPost	*.bz2 execute ":doautocmd BufReadPost " . expand("%:r")
-
-  autocmd BufWritePost,FileWritePost	*.bz2 !mv <afile> <afile>:r
-  autocmd BufWritePost,FileWritePost	*.bz2 !gzip <afile>:r
-
-  autocmd FileAppendPre			*.bz2 !bzip2 -d <afile>
-  autocmd FileAppendPre			*.bz2 !mv <afile>:r <afile>
-  autocmd FileAppendPost		*.bz2 !mv <afile> <afile>:r
-  autocmd FileAppendPost		*.bz2 !bzip2 <afile>:r
-augroup END
-
+"set guifont=*
+"let g:airline_powerline_fonts = 1
