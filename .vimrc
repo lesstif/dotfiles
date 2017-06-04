@@ -4,6 +4,8 @@
 "     for Unix and OS/2:  ~/.vimrc
 "             for Amiga:  s:.vimrc
 "  for MS-DOS and Win32:  $VIM\_vimrc
+" for Vundle. 
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set smartindent
 set tabstop=4
 set shiftwidth=4
