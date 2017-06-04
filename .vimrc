@@ -103,8 +103,9 @@ iab swtich switch
 iab onclude include
 iab okclude include 
 cab init :e $VIM/_vimrc
-cab cpp :source $VIMRUNTIME/syntax/cpp.vim
-cab html :source $VIMRUNTIME/syntax/html.vim
+"확장자가 cpp, html 이면 오작동   
+"cab cpp :source $VIMRUNTIME/syntax/cpp.vim
+"cab html :source $VIMRUNTIME/syntax/html.vim
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
