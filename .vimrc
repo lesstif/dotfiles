@@ -33,7 +33,7 @@ set fileencodings=utf-8,cp949 "Default encoding is UTF8 and korea
 
 set noerrorbells        " turn off beep bells
 set esckeys			" allow usage of cursor keys within insert mode
-set highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
+"set highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
 set ignorecase	" ignore the case in search patterns? NO!
 set noinsertmode	" start in normal mode
 set autoindent	" off as I usually do not write code.
@@ -64,15 +64,15 @@ set showmode
 set nostartofline
 
 " Set the colors for vim on "xterm"
-if &term=="xterm"
-  set t_Co=8
-  set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
-  set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
-endif
+" if &term=="xterm"
+"  set t_Co=8
+"  set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
+"  set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
+"endif
 "       t_vb:  terminal's visual bell - turned off to make Vim quiet!
 "       Please use this as to not annoy cow-orkers in the same room.
 "       Thankyou!  :-)
-  set   t_vb=
+" set   t_vb=
 
 " ABbreviations
 " Abbreviations for some important numbers:
