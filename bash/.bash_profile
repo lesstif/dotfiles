@@ -77,3 +77,6 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=/home/lesstif/gopath
 export PATH=$PATH:$GOPATH/bin
 
+## enable forward search
+## http://vaab.blog.kal.fr/2010/11/11/enabling-ctrl-s-for-forward-history-search-in-bash/
+stty stop ''
