@@ -1,7 +1,7 @@
 
 # User specific environment and startup programs
 export TERM=linux
-export PS1="\[\e[36;1m\]\u@\[\e[32;1m\]\h:\[\e[31;1m\]\w:> \[\e[0m\]" ;
+# export PS1="\[\e[36;1m\]\u@\[\e[32;1m\]\h:\[\e[31;1m\]\w:> \[\e[0m\]" ;
 export EDITOR=vim
 alias vi='vim $*'
 
