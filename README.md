@@ -34,7 +34,16 @@ Linux와 Window, OS X 용 닷파일.
 stow bash
 ```
 
-다른 계정에 설치하려면 -t 옵션 사용. 아래는 root 폴더에 설치
+bash 를 설치한 후에는 PATH 변수 설정은 *.path* 에 설정 
+
+```sh
+PATH=$PATH:/my/new/path
+PATH=$PATH:/opt/prog/bin
+export PATH
+```
+
+- 커밋되지 않기를 원하는 설정이 있을 경우 *.bash_extra* 에 작성
+- 다른 계정에 설치하려면 -t 옵션 사용. 아래는 root 폴더에 설치
 
 ```sh
 sudo stow bash -t /root
