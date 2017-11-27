@@ -37,7 +37,7 @@ elif [ -f /etc/bash_completion ]; then
 elif [ -d /etc/bash_completion.d/ ];then        ## RHEL distro    
     for i in /etc/bash_completion.d/*;do
         source $i;
-    ;done
+    done
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
