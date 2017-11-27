@@ -56,7 +56,7 @@ for i in apprc bash git readline vim zsh;do
 done    
 ```
 
-## 참고 자료
+# 참고 자료
 * [MANAGING DOTFILES WITH GNU STOW](https://taihen.org/managing-dotfiles-with-gnu-stow/)
 
 # 참고 저장소
