@@ -1,81 +1,63 @@
-
-# User specific environment and startup programs
-export TERM=linux
-# export PS1="\[\e[36;1m\]\u@\[\e[32;1m\]\h:\[\e[31;1m\]\w:> \[\e[0m\]" ;
-export EDITOR=vim
-alias vi='vim $*'
-
-alias mvn='/usr/local/apache-maven-3.0.4/bin/mvn'
-
-PATH=$PATH:/usr/local/bin:$HOME/bin
-
-export PATH
-
-alias flyway='${HOME}/flyway/flyway-3.0/flyway'
-#alias curl='curl -O $*'
-
-#alias lv='tail -f $* /home/lesstif/atlassian/confluence-app-data/confluence/logs/
-atlassian-confluence.log'
-#alias lvi='vi /home/lesstif/atlassian/confluence-app-data/confluence/logs/atlassi
-an-confluence.log'
-
-alias lv='tail -f /home/lesstif/tsign-web/apache-tomcat-7.0.53/logs/catalina.out'
-alias lvi='vi /home/lesstif/tsign-web/apache-tomcat-7.0.53/logs/catalina.out'
-alias ant='/usr/local/apache-ant-1.9.4/bin/ant'
-
-alias wp='cd /var/www/wordpress/wordpress-3.9.1/'
-
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:usr/local/bin:$PATH";
 export PATH=$PATH:~/.composer/vendor/bin/
-
-alias lala='cd /var/www/lesstif/php/'
-
-function gi() {
-    curl -L -s https://www.gitignore.io/api/$1 ;
-}
-
-alias gi-java="gi \"eclipse,java,vim,maven,windows,intellij\""
-
-PY27=/usr/local/python2.7/
-export PATH=$PATH:${PY27}/bin
-export LD_LIBRARY_PATH=${PY27}/lib:${LD_LIBRARY_PATH}
-
-## Python 3
-PY35=/usr/local/python3.5/
-export PATH=$PATH:${PY35}/bin
-export LD_LIBRARY_PATH=${PY35}/lib:$LD_LIBRARY_PATH
-
-alias h='http --follow'
-
-alias cls='clear'
-
-export ANSIBLE_INVENTORY=~/ansible/ansible_hosts
 
 export JAVA_HOME=/usr/java/jdk1.8
 export PATH=$JAVA_HOME/bin:$PATH
 
-function jdk7 {
-    export JAVA_HOME=/usr/java/jdk1.7
-    export PATH=$JAVA_HOME/bin:$PATH
-    java -version
-}
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
-function jdk8 {
-    export JAVA_HOME=/usr/java/jdk1.8
-    export PATH=$JAVA_HOME/bin:$PATH
-    java -version
-}
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
 
-function jdk6 {
-    export JAVA_HOME=/usr/java/jdk1.6
-    export PATH=$JAVA_HOME/bin:$PATH
-    java -version
-}
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend;
 
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
 
-export GOPATH=/home/lesstif/gopath
-export PATH=$PATH:$GOPATH/bin
+# Enable some Bash 4 features when possible:
+# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+# * Recursive globbing, e.g. `echo **/*.txt`
+for option in autocd globstar; do
+	shopt -s "$option" 2> /dev/null;
+done;
+
+# Add tab completion for many Bash commands
+if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+	source "$(brew --prefix)/share/bash-completion/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+	source /etc/bash_completion;
+elif [ -d /etc/bash_completion.d/ ];then        ## RHEL distro    
+    for i in /etc/bash_completion.d/*;do
+        source $i;
+    ;done
+fi;
+
+# Enable tab completion for `g` by marking it as an alias for `git`
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+	complete -o default -o nospace -F _git g;
+fi;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Add tab completion for `defaults read|write NSGlobalDomain`
+# You could just use `-g` instead, but I like being explicit
+complete -W "NSGlobalDomain" defaults;
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+# export PS1="\[\e[36;1m\]\u@\[\e[32;1m\]\h:\[\e[31;1m\]\w:> \[\e[0m\]" ;
+
+alias art='php artisan'
 
 ## enable forward search
 ## http://vaab.blog.kal.fr/2010/11/11/enabling-ctrl-s-for-forward-history-search-in-bash/

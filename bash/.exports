@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# User specific environment and startup programs
+export TERM=linux
+
+# Make vim the default editor.
+export EDITOR='vim';
+export VISUAL='vim';
+
+## 
+export ANSIBLE_INVENTORY=~/ansible/ansible_hosts
+
+## python
+PY27=/usr/local/python2.7/
+export PATH=$PATH:${PY27}/bin
+export LD_LIBRARY_PATH=${PY27}/lib:${LD_LIBRARY_PATH}
+
+## Python 3
+PY35=/usr/local/python3.5/
+export PATH=$PATH:${PY35}/bin
+export LD_LIBRARY_PATH=${PY35}/lib:$LD_LIBRARY_PATH
+
+## go path
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+
+export GOPATH=${HOME}/gopath
+export PATH=$PATH:$GOPATH/bin
+
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY=~/.node_history;
+# Allow 32³ entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE='32768';
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE='sloppy';
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+
+# Increase Bash history size. Allow 32³ entries; the default is 500.
+export HISTSIZE='32768';
+export HISTFILESIZE="${HISTSIZE}";
+# Omit duplicates and commands that begin with a space from history.
+export HISTCONTROL='ignoreboth';
+
+# Prefer US English and use UTF-8.
+export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
+
+# Highlight section titles in manual pages.
+export LESS_TERMCAP_md="${yellow}";
+
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X';
+
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
