@@ -1,0 +1,27 @@
+# Lots of junk goes in here.
+/caches/
+/backups/
+
+# Top secret stuff!
+.ssh/*
+##.ssh/*.pem
+##.ssh/known_hosts*
+##.ssh/config
+
+# Don't commit Vim plugins, vim-plug will install them.
+.vim/plugged
+
+# Don't commit rbenv temp files.
+.rbenv/shims/
+.rbenv/versions/
+.rbenv/version
+
+# Don't commit tmux plugins, tpm will install them.
+.tmux/plugins
+
+# Ignore any file with LOCAL in the name (good for per-machine vars/functions)
+*LOCAL*
+
+## ignore vim backup files
+*~
+*.swp

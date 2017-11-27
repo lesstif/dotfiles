@@ -48,7 +48,13 @@ stow -D 옵션 사용
 stow -D bash
 ```
 
-##
+## 전체 dotfile 설치
+
+```sh
+for i in apprc bash git readline vim zsh;do
+    stow $i;
+done    
+```
 
 ## 참고 자료
 * [MANAGING DOTFILES WITH GNU STOW](https://taihen.org/managing-dotfiles-with-gnu-stow/)
