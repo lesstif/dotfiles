@@ -19,7 +19,7 @@ if filereadable(expand("~/.vimrc.before"))
 endif
 
 " ================ General Config ====================
-set number                      "Line numbers are good
+"set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
@@ -121,7 +121,7 @@ set sidescroll=1
 
 set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
-sset ignorecase      " Ignore case when searching...
+set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 
