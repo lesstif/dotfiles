@@ -121,7 +121,7 @@ set sidescroll=1
 
 set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
-sset ignorecase      " Ignore case when searching...
+set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 
