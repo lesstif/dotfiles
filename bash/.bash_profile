@@ -62,3 +62,6 @@ alias art='php artisan'
 ## enable forward search
 ## http://vaab.blog.kal.fr/2010/11/11/enabling-ctrl-s-for-forward-history-search-in-bash/
 stty stop ''
+
+## terminal ls color settings
+eval `dircolors $HOME/.dircolors`
