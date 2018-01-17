@@ -247,6 +247,14 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
  
+Plugin 'tpope/vim-surround'
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/syntastic'
+
+Plugin 'junegunn/vim-easy-align'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -261,14 +269,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
-Plugin 'tpope/vim-surround'
-
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
-
-Plugin 'junegunn/vim-easy-align'
 
 set background=dark
 

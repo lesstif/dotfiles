@@ -26,9 +26,20 @@ Linux와 Window, OS X 용 닷파일.
 
 # 설치
 
+## 전체 dotfile 설치
+
+```sh
+sh -s install.sh
+for i in apprc bash git readline vim zsh;do
+    stow $i;
+done    
+```
+
+## 개별 설치
+
 설치하려면 dotfiles 서브 폴더에서 stow 실행
 
-## vim 설치
+### vim 설치
 
 ```sh
 cd dotfiles
@@ -37,7 +48,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 ```
 
-## bash 설치
+### bash 설치
 
 ```sh
 stow bash
@@ -58,7 +69,7 @@ export PATH
 sudo stow bash -t /root
 ```
 
-## 삭제
+### 삭제
 
 stow -D 옵션 사용
 
@@ -66,13 +77,6 @@ stow -D 옵션 사용
 stow -D bash
 ```
 
-## 전체 dotfile 설치
-
-```sh
-for i in apprc bash git readline vim zsh;do
-    stow $i;
-done    
-```
 
 # 참고 자료
 * [MANAGING DOTFILES WITH GNU STOW](https://taihen.org/managing-dotfiles-with-gnu-stow/)
