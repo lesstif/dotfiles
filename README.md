@@ -28,6 +28,15 @@ Linux와 Window, OS X 용 닷파일.
 
 설치하려면 dotfiles 서브 폴더에서 stow 실행
 
+## vim 설치
+
+```sh
+cd dotfiles
+stow vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+```
+
 ## bash 설치
 
 ```sh
