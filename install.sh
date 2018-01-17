@@ -1,11 +1,36 @@
 #!/usr/bin/env bash
 
-if [ ! -d "$HOME/dotfiles" ]; then
+force=0
+uninst=0
+
+PARAM="fu";
+
+while getopts $PARAM opt; do
+    case $opt in
+        f)
+            force=1;
+            ;;
+        u)
+            uninst=1;
+            ;;
+    esac
+done
+
+DIRS="apprc bash git readline vim zsh"
+
+if [ $uninst -eq 1 ];then
+    for i in ${DIRS}; do
+        echo "uninstall $i";
+        stow -D $i;
+    done
+elif [ ! -d "$HOME/dotfiles" ] || [ $force ]; then
     echo "Installing dotfiles for the first time"
-    git clone https://github.com/lesstif/dotfiles "$HOME/dotfiles"
-    cd "$HOME/"
-    [ "$1" = "ask" ] && export ASK="true"
-    
+    if [ ! -d "$HOME/dotfiles" ];then
+        git clone https://github.com/lesstif/dotfiles "$HOME/dotfiles"
+    fi
+
+    cd "$HOME/dotfiles"
+
     # install GNU stow
 
     ## Ubuntu 
@@ -17,16 +42,17 @@ if [ ! -d "$HOME/dotfiles" ]; then
     ## Cent OS
     ##### sudo yum install stow
 
-    D="apprc bash git readline vim zsh"
-    for i in ${D}; do
+    for i in ${DIRS}; do
         echo "install $i";
         stow $i;
     done
 
     ## install vim Bundle
     echo "install vim plugins"
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ];then
+        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    fi
     vim +PluginInstall +qall
 else
-    echo "dotfiles is already installed"
+    echo "dotfiles is already installed. running with -f options."
 fi
