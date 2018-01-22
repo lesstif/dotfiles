@@ -7,6 +7,7 @@
 
 " for Vundle. 
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" vim +PluginInstall +qall
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
