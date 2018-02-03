@@ -7,7 +7,7 @@ alias mvn='/usr/local/apache-maven-3.0.4/bin/mvn'
 alias flyway='${HOME}/flyway/flyway-3.0/flyway'
 alias ant='/usr/local/apache-ant-1.9.4/bin/ant'
 
-alias curl='curl -O $*'
+##alias curl='curl -O $*'
 
 alias wp='cd /var/www/wordpress/wordpress-3.9.1/'
 
