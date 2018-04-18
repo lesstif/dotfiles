@@ -5,26 +5,37 @@ Linux와 Window, OS X 용 닷파일.
 # 설정
 
 1. GNU stow 설치
-
+    
+    Ubuntu
     ```sh
     sudo apt-get install stow
     ```
 
+    OS X
     ```sh
     brew install stow
     ```
     
+    RHEL/CentOS
     ```sh
     sudo yum install stow
     ```
 
+    Install directly(Amazon Linux, etc)
+    ```sh
+    wget http://ftp.gnu.org/gnu/stow/stow-2.2.2.tar.bz2
+    tar xjvf stow-2.2.2.tar.bz2 
+    cd 
+    cd stow-2.2.2/
+     ./configure && make install
+    ```
 1. 저장소 복제
 
     ```sh
     git clone https://github.com/lesstif/dotfiles.git && cd dotfiles
     ```
 
-# 설치
+# dotfiles 설치
 
 ## 전체 dotfile 설치
 
