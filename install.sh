@@ -42,6 +42,18 @@ elif [ ! -d "$HOME/dotfiles" ] || [ $force ]; then
     ## Cent OS
     ##### sudo yum install stow
 
+    ## backup
+    $BD="$HOME/old-dotfiles"
+    if [ ! -d "$BD" ] ; then
+        mkdir $BD;
+    fi 
+   
+    mv .bash* $BD;
+    mv .vimrc* $BD;
+    mv .inputrc $BD;
+    mv .editrc $BD;
+    mv .aliases $BD;
+
     for i in ${DIRS}; do
         echo "install $i";
         stow $i;
