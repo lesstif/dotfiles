@@ -43,16 +43,16 @@ elif [ ! -d "$HOME/dotfiles" ] || [ $force ]; then
     ##### sudo yum install stow
 
     ## backup
-    $BD="$HOME/old-dotfiles"
+    BD=${HOME}/old-dotfiles
     if [ ! -d "$BD" ] ; then
         mkdir $BD;
-    fi 
-   
-    mv .bash* $BD;
-    mv .vimrc* $BD;
-    mv .inputrc $BD;
-    mv .editrc $BD;
-    mv .aliases $BD;
+    fi
+
+    mv ~/.bash* $BD;
+    mv ~/.vimrc* $BD;
+    mv ~/.inputrc $BD;
+    mv ~/.editrc $BD;
+    mv ~/.aliases $BD;
 
     for i in ${DIRS}; do
         echo "install $i";
