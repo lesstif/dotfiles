@@ -5,10 +5,26 @@ export PATH=$PATH:$HOME/.composer/vendor/bin/:$HOME/.config/composer/vendor/bin
 export JAVA_HOME=/usr/java/jdk1.8
 export PATH=$JAVA_HOME/bin:$PATH
 
+## Detect OS TYPE
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    OS="linux"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    OS="osx"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+    OS="cygwin"
+elif [[ "$OSTYPE" == "msys" ]]; then
+    OS="msys"
+elif [[ "$OSTYPE" == "win32" ]]; then
+    OS="win32"
+fi
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.bash_extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,bash_extra}; do
+# ~/.*_local is local only files, don't commit.
+# ~/.*_${OS} is OS(linux, os x, windows, etc...) dependent files.
+for file in
+    ~/.{path,bash_prompt,exports,exports_local,aliases,aliases_${OS},aliases_local,functions,functions_${OS},functions_local, bash_extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -56,8 +72,6 @@ complete -W "NSGlobalDomain" defaults;
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
 # export PS1="\[\e[36;1m\]\u@\[\e[32;1m\]\h:\[\e[31;1m\]\w:> \[\e[0m\]" ;
-
-alias art='php artisan'
 
 ## enable forward search
 ## http://vaab.blog.kal.fr/2010/11/11/enabling-ctrl-s-for-forward-history-search-in-bash/

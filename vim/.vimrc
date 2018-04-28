@@ -279,5 +279,10 @@ if has("win32")
     set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 endif   
 
+" Forcing Syntax Coloring for files with odd extensions
+" http://vim.wikia.com/wiki/Forcing_Syntax_Coloring_for_files_with_odd_extensions
+autocmd BufNewFile,BufRead .alias* set syntax=bash
+autocmd BufNewFile,BufRead .export* set syntax=bash
+
 "set guifont=*
 "let g:airline_powerline_fonts = 1
