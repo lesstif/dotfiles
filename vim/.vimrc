@@ -9,6 +9,11 @@
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " vim +PluginInstall +qall
 
+
+"==== language setting
+set langmenu=en_US.UTF-8
+language messages en_US.UTF-8
+
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -127,8 +132,6 @@ set smartcase       " ...unless we type a capital
 
 
 " ================= Language and Encoding =============
-set langmenu=en_US.UTF-8
-
 set encoding=utf-8
 set fileencodings=utf-8,cp949 "Default encoding is UTF8 and korea
 
