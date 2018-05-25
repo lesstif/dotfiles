@@ -5,38 +5,57 @@ ECHO set-executionpolicy remotesigned -s currentuser &
 ECHO iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
 REM add new bucket
-scoop bucket add nerd-fonts
 scoop bucket add extras
+scoop bucket add versions
+scoop bucket add java
 
-REM install font
+REM font install need admin rights.
+scoop bucket add nerd-fonts
 
-REM utility
-scoop install 7zip
-scoop install openssl
-scoop install sysinternals 
-scoop install procexp 
+REM install sudo for admin rights
+scoop install sudo
+
+REM ======================================
+REM ================ Util ================
+scoop install 7zip vim notepadplusplus ctags 
+scoop install openssl sysinternals procexp 
+
+REM copy _vimrc to %HOME%\_vimrc
+
+REM ====================================
+REM ====== DEVEL   =====================
+scoop install git 
+
+REM Java
+scoop install oraclejdk8 oraclejdk9 maven ant gradle
+
+REM PHP
+scoop install php php71 php70 php56 composer
+REM scoop install php-xdebug
+
+REM python
+scoop install python python35 python34
+
+REM ruby
+scoop install ruby
+
+REM go
+scoop install go
+
+REM nodejs
+scoop install nodejs nodejs9 nodejs8 nodejs7 nodejs6
+scoop install gulp-cli 
 
 REM font
-scoop install firacode-nf
-scoop install SourceCodePro-NF
-
-REM editor
-scoop install vim 
-scoop install ctags 
+sudo scoop install firacode-nf SourceCodePro-NF
+sudo scoop install nanum-coding
  
 REM network-util
 scoop install curl 
 scoop install putty 
 scoop install filezilla 
 
-REM develop package
-scoop install git 
-scoop install nodejs 
-scoop install gulp-cli 
-scoop install python 
-scoop install ruby 
-scoop install heidisql  
-scoop install php 
-
-REM scoop install php --version 7.0.23 
+REM ======================================================
+REM DBMS
 scoop install mysql 
+scoop install heidisql  
