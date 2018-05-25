@@ -1,10 +1,9 @@
-@ECHO OFF
+#  scoop install script
 
-ECHO run powsshell and paste below command on powershell prompt &
-ECHO set-executionpolicy remotesigned -s currentuser &
-ECHO iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+set-executionpolicy remotesigned -s currentuser
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
-REM add new bucket
+# add new bucket
 scoop bucket add extras
 scoop bucket add versions
 scoop bucket add java
