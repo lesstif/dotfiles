@@ -17,11 +17,11 @@ scoop install sudo
 
 Write-Host "============================================================="
 Write-Host "====== Installling development package  ====================="
-scoop install git 
+scoop install git sourcetree
 
 Write-Host "============================================================="
 Write-Host "================ Installing utility ================"
-scoop install 7zip notepadplusplus ctags 
+scoop install 7zip notepadplusplus ctags slack
 
 Write-Host "============================================================="
 Write-Host "================ Installing GNUWin32 ================"
