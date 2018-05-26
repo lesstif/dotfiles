@@ -23,6 +23,10 @@ Write-Host "============================================================="
 Write-Host "================ Installing utility ================"
 scoop install 7zip notepadplusplus ctags 
 
+Write-Host "============================================================="
+Write-Host "================ Installing GNUWin32 ================"
+scoop install grep file sed which 
+
 Write-Host "================ vim ================"
 & .\vim-install.ps1
 
@@ -30,7 +34,7 @@ scoop install openssl sysinternals procexp
 
 Write-Host "============================================================="
 Write-Host "====== Installling JAVA package  ============================"
-scoop install oraclejdk8 maven ant gradle
+& .\java-install.ps1
 
 Write-Host "============================================================="
 Write-Host "====== Installling PHP package  ============================="
@@ -62,9 +66,7 @@ sudo scoop install nanum-coding
  
 Write-Host "============================================================="
 Write-Host "====== Installling Network Util package  ===================="
-scoop install curl 
-scoop install putty 
-scoop install filezilla 
+scoop install curl wget putty ssh-copy-id filezilla 
 
 Write-Host "============================================================="
 Write-Host "====== Installling DBMS package ============================="

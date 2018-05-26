@@ -8,6 +8,9 @@ scoop install php71 extras/vcredist2017
 ## current php 7.2
 scoop install php extras/vcredist2017 composer
 
+## install phpstorm
+scoop install phpstorm
+
 ## x-debug Debugger:
 # scoop install php-xdebug
 
