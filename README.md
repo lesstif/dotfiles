@@ -2,6 +2,12 @@
 
 Linux와 Window, OS X 용 닷파일.
 
+# Windows 설치
+
+```sh
+powershell -file scoop-install-package.ps1
+```
+
 # 설정
 
 ## GNU stow 설치

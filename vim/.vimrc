@@ -89,7 +89,7 @@ filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
+"set list listchars=tab:\ \ ,trail:·
 
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
@@ -135,13 +135,66 @@ set smartcase       " ...unless we type a capital
 set encoding=utf-8
 set fileencodings=utf-8,cp949 "Default encoding is UTF8 and korea
 
+" =================== screen size restore ===================
+if has("gui_running")
+  function! ScreenFilename()
+    if has('win32')
+      return $HOME.'\.vimsize'
+    else
+      return $HOME.'/.vimsize'
+    endif
+  endfunction
+
+  function! ScreenRestore()
+    " Restore window size (columns and lines) and position
+    " from values stored in vimsize file.
+    " Must set font first so columns and lines are based on font size.
+    let f = ScreenFilename()
+    if has("gui_running") && g:screen_size_restore_pos && filereadable(f)
+      let vim_instance = (g:screen_size_by_vim_instance==1?(v:servername):'GVIM')
+      for line in readfile(f)
+        let sizepos = split(line)
+        if len(sizepos) == 5 && sizepos[0] == vim_instance
+          silent! execute "set columns=".sizepos[1]." lines=".sizepos[2]
+          silent! execute "winpos ".sizepos[3]." ".sizepos[4]
+          return
+        endif
+      endfor
+    endif
+  endfunction
+
+  function! ScreenSave()
+    " Save window size and position.
+    if has("gui_running") && g:screen_size_restore_pos
+      let vim_instance = (g:screen_size_by_vim_instance==1?(v:servername):'GVIM')
+      let data = vim_instance . ' ' . &columns . ' ' . &lines . ' ' .
+            \ (getwinposx()<0?0:getwinposx()) . ' ' .
+            \ (getwinposy()<0?0:getwinposy())
+      let f = ScreenFilename()
+      if filereadable(f)
+        let lines = readfile(f)
+        call filter(lines, "v:val !~ '^" . vim_instance . "\\>'")
+        call add(lines, data)
+      else
+        let lines = [data]
+      endif
+      call writefile(lines, f)
+    endif
+  endfunction
+
+  if !exists('g:screen_size_restore_pos')
+    let g:screen_size_restore_pos = 1
+  endif
+  if !exists('g:screen_size_by_vim_instance')
+    let g:screen_size_by_vim_instance = 1
+  endif
+
+  autocmd VimEnter * if g:screen_size_restore_pos == 1 | call ScreenRestore() | endif
+  autocmd VimLeavePre * if g:screen_size_restore_pos == 1 | call ScreenSave() | endif
+endif
+
 if has("win32")
-    "set guifont=Gulimche:h12:cHANGEUL
-    set guifont=나눔고딕코딩:h12:cHANGEUL:qDEFAULT
-    set guifont=Source_Code_Pro:h12:cANSI:qDEFAULT
-    source $VIMRUNTIME/_gvimrc
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
+
 else
     " unix or mac
     "set termencoding=utf-8
@@ -274,13 +327,16 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set background=dark
-
+"set background=dark
 colorscheme solarized
+set background=light
+let g:solarized_termcolors= 256
+let g:solarized_contrast  = "high"
 
-if has("win32")
-    set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
-endif   
+
+" Look for the file in the current directory, then south until you reach home.
+set tags=tags;$HOME
+
 
 " Forcing Syntax Coloring for files with odd extensions
 " http://vim.wikia.com/wiki/Forcing_Syntax_Coloring_for_files_with_odd_extensions
