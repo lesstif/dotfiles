@@ -6,6 +6,11 @@ Write-Host "install scooop"
 set-executionpolicy remotesigned -s currentuser
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
+## firstly extra bucket need git
+Write-Host "============================================================="
+Write-Host "====== Installling git package  ====================="
+scoop install 7zip git 
+
 Write-Host "add new bucket...."
 scoop bucket add extras
 scoop bucket add versions
@@ -17,11 +22,11 @@ scoop install sudo
 
 Write-Host "============================================================="
 Write-Host "====== Installling development package  ====================="
-scoop install git sourcetree
+scoop install sourcetree
 
 Write-Host "============================================================="
 Write-Host "================ Installing utility ================"
-scoop install 7zip notepadplusplus ctags slack
+scoop install notepadplusplus ctags slack
 
 Write-Host "============================================================="
 Write-Host "================ Installing GNUWin32 ================"
@@ -61,12 +66,14 @@ scoop install gulp-cli
 
 Write-Host "============================================================="
 Write-Host "====== Installling font   package  =========================="
-sudo scoop install firacode-nf SourceCodePro-NF
-sudo scoop install nanum-coding
+## sudo scoop install firacode-nf SourceCodePro-NF
+## sudo scoop install nanum-coding
+##& .\font-install.ps1
+
  
 Write-Host "============================================================="
 Write-Host "====== Installling Network Util package  ===================="
-scoop install curl wget putty ssh-copy-id filezilla ngrok
+scoop install curl wget putty ssh-copy-id filezilla ngrok openssh
 
 Write-Host "============================================================="
 Write-Host "====== Installling DBMS package ============================="

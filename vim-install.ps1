@@ -8,6 +8,9 @@ $Vundle_DIR = "$env:Userprofile/.vim/bundle/Vundle.vim"
 if(!(Test-Path -Path $Vundle_DIR )){
     $vundle_install = "git clone https://github.com/VundleVim/Vundle.vim.git $Vundle_DIR"
     iex -ErrorAction SilentlyContinue $vundle_install
+
+    $solarized = "git clone https://github.com/altercation/vim-colors-solarized.git $env:Userprofile/.vim/bundle/vim-colors-solarized"
+    iex -ErrorAction SilentlyContinue "$solarized"
 }
 
 $vim_run = 'vim +PluginInstall +qall'

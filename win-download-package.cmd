@@ -4,6 +4,8 @@ set WGET=wget --no-check-certificate --content-disposition
 
 %WGET% https://www.bandisoft.com/bandizip/dl.php?web
 
+%WGET% "https://downloads.atlassian.com/software/sourcetree/windows/ga/SourceTreeSetup-2.5.5.exe"
+
 REM Source code Pro
 %WGET% https://github.com/adobe-fonts/source-code-pro/archive/2.030R-ro/1.050R-it.zip
 
