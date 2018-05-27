@@ -66,7 +66,7 @@ sudo scoop install nanum-coding
  
 Write-Host "============================================================="
 Write-Host "====== Installling Network Util package  ===================="
-scoop install curl wget putty ssh-copy-id filezilla 
+scoop install curl wget putty ssh-copy-id filezilla ngrok
 
 Write-Host "============================================================="
 Write-Host "====== Installling DBMS package ============================="

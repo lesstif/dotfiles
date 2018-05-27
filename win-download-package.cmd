@@ -18,3 +18,6 @@ REM nanum font
 
 REM Total commander
 %WGET% https://totalcommander.ch/win/tcmd912x32_64.exe
+
+REM https://github.com/mailhog/MailHog/
+%WGET% https://github.com/mailhog/MailHog/releases/download/v1.0.0/MailHog_windows_amd64.exe
