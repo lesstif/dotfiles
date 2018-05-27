@@ -6,6 +6,7 @@ Linux와 Window, OS X 용 닷파일.
 
 ```sh
 powershell -file scoop-install-package.ps1
+sudo powershell -file font-install.ps1
 ```
 
 # 설정
