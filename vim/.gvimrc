@@ -16,15 +16,19 @@ if has("gui_running")
       source $VIMRUNTIME/mswin.vim
       behave mswin
       "set guifont=Gulimche:h12:cHANGEUL
-      set guifont=나눔고딕코딩:h12:cHANGEUL:qDEFAULT
-      set guifont=Source_Code_Pro:h12:cANSI:qDEFAULT
+      set guifont=Source\ Code\ Pro:h14:cANSI:qDEFAULT
+      set guifont=나눔고딕코딩:h14:cHANGEUL:qDEFAULT
       set renderoptions=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 "      set guioptions-=L
+  elseif has('gui_macvim')
+      set guifont=Source\ Code\ Pro:h14
+      set antialias
   else
-      set guifont=Consolas:h10
+      set guifont=Source\ Code\ Pro:h14
+      "set guifont=Consolas:h10
   endif
-  " Turn on toolbar
-  set guioptions+=T
+  " Turn off toolbar
+  set guioptions-=T
   " Turn on menu
   set guioptions+=m
 end
