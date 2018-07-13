@@ -20,3 +20,6 @@ SET DOCKER_TLS_VERIFY=1
 :: MACHINE_STORAGE_PATH=d:\docker\machine\default
 ::
 SET PATH=%PATH%;c:\util\Sysinternals;D:\devel\gradle-2.9\bin;
+
+:: load another aliases
+%SystemRoot%\system32\doskey /listsize=1000 /macrofile=%CMDER_ROOT%\config\user-custom-aliases.cmd
