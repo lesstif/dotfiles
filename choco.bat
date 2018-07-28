@@ -1,3 +1,17 @@
+@ECHO OFF
+
+echo Administrative permissions required. Detecting permissions...
+echo.
+
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Success: Administrative permissions confirmed.
+) else (
+    echo Failure: Current permissions inadequate. 
+    echo Exiting....
+    goto exitScript
+)
+
 @ECHO ON
 
 REM setting choco installation path
@@ -12,26 +26,36 @@ REM
 
 REM utility
 choco install chocolatey-core.extension -y
-choco install 7zip -y
-choco install sysinternals -y
-choco install procexp -y
-
-REM editor
-choco install vim -y
-choco install ctags -y
+REM choco install 7zip -y
+REM choco install sysinternals -y
+REM choco install procexp -y
  
+REM editor
+REM choco install vim -y
+REM choco install ctags -y
+REM  
 REM network-util
-choco install curl -y
-choco install putty -y
-choco install filezilla -y
+REM choco install curl -y
+REM choco install putty -y
+REM choco install filezilla -y
 
 REM develop package
-choco install git -y
-choco install nodejs -y
-choco install gulp-cli -y
-choco install python -y
-choco install ruby -y
-choco install heidisql -y 
-choco install php -y
+REM choco install git -y
+REM choco install nodejs -y
+REM choco install gulp-cli -y
+REM choco install python -y
+REM choco install ruby -y
+REM choco install heidisql -y 
+REM choco install php -y
 REM choco install php --version 7.0.23 -y
 choco install mysql -y
+
+REM Font
+choco install d2codingfont -y
+choco install sourcecodepro -y
+choco install firacode -y
+choco install hackfont -y
+
+:exitScript
+exit /b
+
