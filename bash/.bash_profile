@@ -23,8 +23,7 @@ fi
 # * ~/.bash_extra can be used for other settings you don’t want to commit.
 # ~/.*_local is local only files, don't commit.
 # ~/.*_${OS} is OS(linux, os x, windows, etc...) dependent files.
-for file in
-    ~/.{path,bash_prompt,exports,exports_local,aliases,aliases_${OS},aliases_local,functions,functions_${OS},functions_local, bash_extra}; do
+for file in ~/.{path,bash_prompt,exports,exports_local,aliases,aliases_${OS},aliases_local,functions,functions_${OS},functions_local, bash_extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
