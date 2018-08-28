@@ -15,9 +15,15 @@ if has("gui_running")
   if has('win32')
       source $VIMRUNTIME/mswin.vim
       behave mswin
+      
+      " Prevent CTRL-F to abort the selection (in visual mode)
+      " This is caused by $VIM/_vimrc ':behave mswin' which sets 'keymodel' to
+      " include 'stopsel' which means that non-shifted special keys stop selection.
+      set keymodel=startsel
+       
       "set guifont=Gulimche:h12:cHANGEUL
-      set guifont=Source\ Code\ Pro:h14:cANSI:qDEFAULT
-      set guifont=나눔고딕코딩:h14:cHANGEUL:qDEFAULT
+      set guifont=Source\ Code\ Pro:h14:cANSI:qDEFAULT      
+      set guifont=D2Coding\ ligature:h14:cHANGEUL:qDEFAULT
       set renderoptions=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 "      set guioptions-=L
   elseif has('gui_macvim')
