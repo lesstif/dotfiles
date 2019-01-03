@@ -6,7 +6,7 @@
 
 SET ACE_DIR=D:\devel\ACE_wrappers
 
-SET EDITOR="C:\util\Vim8.0\vim80\gvim.exe"
+SET EDITOR="gvim.exe"
 
 :: for CMake
 SET CMAKE_MAKE_PROGRAM=mingw32-make
