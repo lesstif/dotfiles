@@ -10,7 +10,7 @@ pwd=cd
 clear=cls
 history=cat "%CMDER_ROOT%\config\.history"
 unalias=alias /d 
-vi=gvim $*
+vi=START/B gvim $*
 cmderr=cd /d "%CMDER_ROOT%"
 dp=dir $t pwd  
 ;= utility & convinience command
@@ -28,21 +28,21 @@ qal2=gvim "%CMDER_ROOT%\config\user-custom-aliases.cmd" $t alias/reload $t %Syst
 sett=gvim "%CMDER_ROOT%\config\user-profile.cmd" 
 
 ;= vim
-vimrc=gvim %HOME%\scoop\apps\vim\current\_vimrc
-virc=gvim %HOME%\scoop\apps\vim\current\_vimrc
+vimrc=START/B gvim %HOME%\scoop\apps\vim\current\_vimrc
+virc=START/B gvim %HOME%\scoop\apps\vim\current\_vimrc
 
 ;=
-eh=gvim C:\Windows\System32\drivers\etc\hosts
+eh=gvim %SystemRoot%\System32\drivers\etc\hosts
 
 ;= develop tools
 ant=d:\devel\apache-ant-1.9.1\bin\ant.bat $*
-;= valet=C:\Users\lesstif\AppData\Roaming\Composer\vendor\bin\valet.bat  $*
+;= valet="%APPDATA%"\Composer\vendor\bin\valet.bat  $*
 
 ;==
-security-best-practice=pushd . $t cd /d C:\Users\lesstif\Code\security-best-practices $t gitbook serve $t popd
+security-best-practice=pushd . $t cd /d %HOME%\Code\security-best-practices $t gitbook serve $t popd
 
 ;=
-;=npm C:\Program Files\nodejs\npm.cmd npm --no-bin-links $*
+;=npm %ProgramFiles%\nodejs\npm.cmd npm --no-bin-links $*
 
 ;= develoption
 ;=JDK설정
@@ -80,13 +80,13 @@ please=php please $*
 ple=php please $*
 
 ;= Visual Studio shell
-9vcvars32="C:\Program Files\Microsoft Visual Studio 9.0\VC\bin\vcvars32.bat"
-10vcvars32="C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"
-14vcvars32="d:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\vcvars32.bat"
+9vcvars32="%ProgramFiles%\Microsoft Visual Studio 9.0\VC\bin\vcvars32.bat"
+10vcvars32="%ProgramFiles%\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"
+14vcvars32="%ProgramFiles%\Microsoft Visual Studio 14.0\VC\bin\vcvars32.bat"
 
 vc=14vcvars32
 
-mysql="C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe" "--defaults-file=C:\ProgramData\MySQL\MySQL Server 5.7\my.ini"  $*
+mysql="%ProgramFiles%\MySQL\MySQL Server 5.7\bin\mysql.exe" "--defaults-file=%ProgramFiles%\MySQL\MySQL Server 5.7\my.ini"  $*
 
 ;=cmake d:\devel\cmake\cmake-3.4.2-win32-x86\bin\cmake.exe
 cmake=d:\devel\cmake\cmake-3.6.1-win32-x86\bin\cmake.exe $*
@@ -106,18 +106,16 @@ flyway2=d:\util\flyway-2.3.1-no-clean-target\flyway.cmd
 h=http --follow
 
 ;= html2pdf
-wkhtmltopdf="D:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" $*
-wpdf="D:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe" $*
-wkhtmltoimage="D:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe" $*
-wimage=wkhtmltoimage
-wimg=wkhtmltoimage
+wimage=wkhtmltoimage.exe $*
+wimg=wkhtmltoimage $*
+wpdf=wkhtmltopdf.exe $*
 
 ;= ffmpeg
 ;= ffplay="D:\util\ffmpeg-4.0-win64-static\bin\ffplay.exe"
 ;= ffprobe="D:\util\ffmpeg-4.0-win64-static\bin\ffprobe.exe"
 
 ;=
-code=cd/d "%USERPROFILE%"\code
+code=cd/d "%HOME%"\code
 
 ;=go
 go=d:\devel\golang\go-1.9.1\bin\go.exe
@@ -134,10 +132,11 @@ gijava=%CURL_GI%/vim,java,windows,osx,linux,eclipse,intellij,maven,gradle  -o .g
 giphp=%CURL_GI%/vim,php,windows,osx,linux,phpstorm,laravel,composer  -o gitignore
 
 ;= for headless chrome
-chrome="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" $*
-hchrome="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --headless $*
+chrome="%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" $*
+hchrome="%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" --headless $*
 
 ;=
-redis-cli="C:\Program Files\Redis\redis-cli.exe" $*
-laravel="%USERPROFILE%\scoop\apps\composer\current\home\vendor\bin\laravel.bat" $*  
+redis-cli="%ProgramFiles%\Redis\redis-cli.exe" $*
+laravel="%HOME%\scoop\apps\composer\current\home\vendor\bin\laravel.bat" $*  
+
 
