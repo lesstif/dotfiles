@@ -107,12 +107,18 @@
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
 
+	## prevent octal-escaped UTF-8 format 
+	quotepath = false
+
 [color]
 
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
 	ui = auto
-
+	
+  	diff = on
+    	status = on
+    	branch = on
 [color "branch"]
 
 	current = yellow reverse
