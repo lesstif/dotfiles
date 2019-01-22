@@ -25,7 +25,7 @@ ar=alias/reload $t %SystemRoot%\system32\doskey /listsize=2000 /macrofile=%CMDER
 reload=alias/reload $t %SystemRoot%\system32\doskey /listsize=2000 /macrofile=%CMDER_ROOT%\config\user-custom-aliases.cmd
 qal=gvim "%CMDER_ROOT%\config\user-aliases.cmd" $t alias/reload $t %SystemRoot%\system32\doskey /listsize=2000 /macrofile=%CMDER_ROOT%\config\user-custom-aliases.cmd
 qal2=gvim "%CMDER_ROOT%\config\user-custom-aliases.cmd" $t alias/reload $t %SystemRoot%\system32\doskey /listsize=2000 /macrofile=%CMDER_ROOT%\config\user-custom-aliases.cmd
-sett=gvim "%CMDER_ROOT%\config\user-profile.cmd" 
+sett=gvim "%CMDER_ROOT%\config\user-profile.cmd" $t call  "%CMDER_ROOT%\config\user-profile.cmd
 
 ;= vim
 vimrc=START/B gvim %HOME%\scoop\apps\vim\current\_vimrc
