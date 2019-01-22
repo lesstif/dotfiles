@@ -23,8 +23,11 @@ SET PATH=%PATH%;c:\util\Sysinternals;D:\devel\gradle-2.9\bin;
 SET EDITOR=gvim.exe
 SET VI=%EDITOR%
 
-SET JAVA_HOME=%HOME%\scoop\apps\oraclejdk8\current
+:: SET JAVA_HOME=%HOME%\scoop\apps\oraclejdk8\current
+SET JAVA_HOME=C:\devel\java\zulu8.33.0.1-jdk8.0.192-win_x64
 SET PATH=%JAVA_HOME%\bin;%PATH%;
+
+SET M2_HOME=d:\devel\maven
 
 ::PHP
 ::SET PATH=D:\devel\php\php-7.1.14-Win32-VC14-x64;%PATH%;
