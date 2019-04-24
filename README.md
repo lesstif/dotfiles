@@ -4,6 +4,24 @@ Linux와 Window, OS X 용 닷파일.
 
 # Windows 설치
 
+먼저 패키지 매니저인 scoop 을 설치하기 위해 파워셀 기동
+
+```sh
+powershell 
+```
+
+파워쉘 프롬프트에서 scoop 을 설치하기 위한 정책 변경(미실행시 scoop 이 설치 안 되니 주의)
+
+```sh
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+```
+
+scoop 설치
+```sh
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+```
+
+이제 scoop 으로 패키지 설치
 ```sh
 powershell -file scoop-install-package.ps1
 sudo powershell -file font-install.ps1
