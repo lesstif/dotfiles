@@ -1,24 +1,14 @@
-## Launching code from the Command Line
+## code from the Command Line
 - https://code.visualstudio.com/docs/setup/mac
+- https://code.visualstudio.com/docs/setup/windows
 
-## Visual Studio Code Extensions
-The Visual Studio Code Extensions I used are listed below:
+## Windows Powershell 에서 설치
 
-- Advanced New File
-- Beautify
-- EditorConfig for VS Code
-- ESLint
-- Git Project Manager
-- GitLens
-- JavaScript (ES6) code snippets
-- pasteandformat
-- Paste and Indent
-- PHP Intellisense - Crane
-- PHP Symbols
-- TODO Highlight
-- Trailing Spaces
-- TSLint
-- vetur
-- Vim
-- vscode-icons
-- View In Browser
+1. powershell 기동
+
+2. ps 프롬프트에서 아래 파일 입력하고 엔터
+
+```ps
+.\vscode-ext-install.ps1
+```
+
