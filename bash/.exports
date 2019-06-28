@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # User specific environment and startup programs
-export TERM=linux
+# export TERM=linux
+## for windows terminal(https://github.com/microsoft/terminal/issues/1040)
+export TERM=term-256color
 
 # Make vim the default editor.
 export EDITOR='vim';
