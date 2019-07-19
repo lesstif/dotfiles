@@ -11,7 +11,8 @@ if [ ! -x "/usr/local/bin/stow" ] && [ ! -x "/usr/bin/stow" ];then
     cd stow-2.2.2;
     ./configure && make;
     
-    echo "you must run \"make install\" command as root";
+    echo "";
+    echo "YOU MUST RUN \"make install\" COMMAND AS ROOT";
     exit 0;
 fi;
 
