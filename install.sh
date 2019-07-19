@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+## check whether stow installed.
+URL="http://ftp.gnu.org/gnu/stow/stow-latest.tar.gz"
+
+if [ ! -x "/usr/local/bin/stow" ] && [ ! -x "/usr/bin/stow" ];then
+    echo "stow not found."
+    echo "downloading from $URL now..";
+    wget $URL;
+    tar zxvf stow-latest.tar.gz;
+    cd stow*[0-9];
+    ./configure && make;
+    
+    echo "you must run \"make install\" command as root";
+    exit 0;
+fi;
+
+
 force=0
 uninst=0
 
