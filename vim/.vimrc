@@ -317,6 +317,8 @@ Plugin 'scrooloose/syntastic'
 
 Plugin 'junegunn/vim-easy-align'
 
+Plugin 'editorconfig/editorconfig-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
