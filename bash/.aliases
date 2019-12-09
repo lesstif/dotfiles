@@ -6,7 +6,7 @@ alias mvn='/usr/local/maven/bin/mvn'
 # alias flyway='${HOME}/flyway/flyway-3.0/flyway'
 alias ant='/usr/local/apache-ant/bin/ant'
 
-alias curl='curl -C - -O $*'
+alias curl-downloader='curl -C - -O $*'
 
 alias wp='cd /var/www/wordpress/wordpress-latest/'
 
