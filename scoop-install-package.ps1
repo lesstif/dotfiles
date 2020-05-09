@@ -3,8 +3,8 @@
 Write-Host "install scooop"
 
 # $ErrorActionPreference = 'silentlycontinue'
-set-executionpolicy remotesigned -s currentuser
-iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+# set-executionpolicy remotesigned -s currentuser
+# iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
 ## firstly extra bucket need git
 Write-Host "============================================================="
@@ -33,7 +33,7 @@ Write-Host "================ Installing GNUWin32 ================"
 scoop install grep file sed which 
 
 Write-Host "================ vim ================"
-& .\vim-install.ps1
+# & .\vim-install.ps1
 
 scoop install openssl sysinternals procexp 
 

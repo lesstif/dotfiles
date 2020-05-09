@@ -1,17 +1,10 @@
-# dot files
+## dot files
 
-Linux와 Window, OS X 용 닷파일.
+Linux와 OS X 용 닷파일. Windows 용은 [dotfiles-windows](https://github.com/lesstif/dotfiles-windows) 참고
 
-# Windows 설치
+## 사전 준비
 
-```sh
-powershell -file scoop-install-package.ps1
-sudo powershell -file font-install.ps1
-```
-
-# 설정
-
-## GNU stow 설치
+[GNU stow](https://www.gnu.org/software/stow/) 가 필요하므로 OS 에 맞게 설치
 
 ### Ubuntu
 
@@ -40,66 +33,47 @@ cd stow-2.2.2/
 ./configure && make install
 ```
 
-## 저장소 복제
+## dotfiles 설치
 
-```sh
-git clone https://github.com/lesstif/dotfiles.git && cd dotfiles
-```
+1. 저장소 복제
 
-# dotfiles 설치
+    ```sh
+    git clone https://github.com/lesstif/dotfiles.git && cd dotfiles
+    ```
 
-설치하려면 dotfiles 서브 폴더에서 stow 실행
+1. dotfiles 설치
 
-## vim 설치
+    ```sh
+    bash install.sh
 
-```sh
-cd dotfiles
-stow vim
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-```
+1. commit 되지 않기를 원하는 설정 파일이 있을 경우 *.bash_extra* 에 작성
 
-## bash 설치
+1. 다른 계정에 설치하려면 -t 옵션 사용. 아래는 root 폴더에 설치
 
-```sh
-stow bash
-```
+    ```sh
+    sudo stow bash -t /root
+    ```
 
-bash 를 설치한 후에는 PATH 변수 설정은 *.path* 에 설정 
+## dotfile 삭제
 
-```sh
-PATH=$PATH:/my/new/path
-PATH=$PATH:/opt/prog/bin
-export PATH
-```
+1. stow -D 옵션 사용해서 삭제
 
-- 커밋되지 않기를 원하는 설정이 있을 경우 *.bash_extra* 에 작성
-- 다른 계정에 설치하려면 -t 옵션 사용. 아래는 root 폴더에 설치
+    ```sh
+    stow -D bash
+    ```
 
-```sh
-sudo stow bash -t /root
-```
+1. 전체 dotfile 삭제
 
-## 삭제
+    ```sh
+    for i in apprc bash git readline vim zsh;do
+        stow -D $i;
+    done    
+    ```
 
-stow -D 옵션 사용
-
-```sh
-stow -D bash
-```
-
-## 전체 dotfile 설치
-
-```sh
-for i in apprc bash git readline vim zsh;do
-    stow $i;
-done    
-```
-
-# 참고 자료
+## 참고 자료
 * [MANAGING DOTFILES WITH GNU STOW](https://taihen.org/managing-dotfiles-with-gnu-stow/)
 
-# 참고 저장소
+## 참고 저장소
 
 * [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles)
 * [Mathias Bynens’ dotfiles](https://github.com/mathiasbynens/dotfiles)
