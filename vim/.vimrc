@@ -66,10 +66,15 @@ set nowb
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') && isdirectory(expand('~').'/.vim/backups')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
+if has('persistent_undo') 
+    let myUndoDir=expand('~'). '/.vim/backups'
+    
+    if !isdirectory(myUndoDir)
+        call mkdir(myUndoDir, "p")
+    endif
+
+    set undodir=&myUndoDir
+    set undofile
 endif
 
 " ================ Indentation ======================
@@ -312,6 +317,8 @@ Plugin 'scrooloose/syntastic'
 
 Plugin 'junegunn/vim-easy-align'
 
+Plugin 'editorconfig/editorconfig-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -329,7 +336,7 @@ filetype plugin indent on    " required
 
 "set background=dark
 colorscheme solarized
-set background=light
+set background=dark
 let g:solarized_termcolors= 256
 let g:solarized_contrast  = "high"
 

@@ -54,6 +54,23 @@ cd stow-2.2.2/
     sudo stow bash -t /root
     ```
 
+### stow 실행 에러 
+
+"Can't locate Clone/Choose.pm in @INC" 와 같이 perl 모듈이 없다고 실행되지 않을때 모듈 설치  
+
+root 로 CPAN 모듈 실행
+
+```sh
+perl -MCPAN -e shell
+```
+
+CPAN 프롬프트에서 없다고 하는 모듈 설치
+
+```sh
+install Clone::Choose
+install Hash::Merge
+```
+
 ## dotfile 삭제
 
 1. stow -D 옵션 사용해서 삭제

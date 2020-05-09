@@ -24,9 +24,6 @@ Write-Host "============================================================="
 Write-Host "====== Installling development package  ====================="
 scoop install sourcetree
 
-Write-Host "============================================================="
-Write-Host "================ Installing utility ================"
-scoop install notepadplusplus ctags slack
 
 Write-Host "============================================================="
 Write-Host "================ Installing GNUWin32 ================"
@@ -62,20 +59,23 @@ scoop install go
 Write-Host "============================================================="
 Write-Host "====== Installling nodejs package  =========================="
 scoop install nodejs # nodejs9 nodejs8 nodejs7 nodejs6
-scoop install gulp-cli 
+scoop install gulp-cli
 
 Write-Host "============================================================="
 Write-Host "====== Installling font   package  =========================="
 ## sudo scoop install firacode-nf SourceCodePro-NF
 ## sudo scoop install nanum-coding
 ##& .\font-install.ps1
-
  
 Write-Host "============================================================="
 Write-Host "====== Installling Network Util package  ===================="
-scoop install curl wget putty ssh-copy-id filezilla ngrok openssh
+scoop install curl wget putty ssh-copy-id filezilla ngrok openssh firefox
 
 Write-Host "============================================================="
 Write-Host "====== Installling DBMS package ============================="
 scoop install mysql 
 scoop install heidisql
+
+Write-Host "============================================================="
+Write-Host "====== Installling Windows Util package  ===================="
+& .\utility-install.ps1

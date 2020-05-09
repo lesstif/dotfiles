@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+## check whether stow installed.
+URL="http://ftp.gnu.org/gnu/stow/stow-2.2.2.tar.gz"
+
+if [ ! -x "/usr/local/bin/stow" ] && [ ! -x "/usr/bin/stow" ];then
+    echo "stow not found."
+    echo "downloading from $URL now..";
+    wget $URL;
+    tar zxvf stow-2.2.2.tar.gz;
+    cd stow-2.2.2;
+    ./configure && make;
+    
+    echo "";
+    echo "YOU MUST RUN \"make install\" COMMAND AS ROOT";
+    exit 0;
+fi;
+
+
 force=0
 uninst=0
 
@@ -58,13 +75,28 @@ elif [ ! -d "$HOME/dotfiles" ] || [ $force ]; then
         echo "install $i";
         stow $i;
     done
-
-    ## install vim Bundle
-    echo "install vim plugins"
-    if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ];then
-        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    fi
-    vim +PluginInstall +qall
 else
     echo "dotfiles is already installed. running with -f options."
 fi
+
+## install vim Bundle
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ];then
+    echo "install vim plugins"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+vim +PluginInstall +qall
+
+## install curl
+CURL=$(which curl)
+if [ ! -x ${CURL} ];then
+    echo "curl not found";
+    echo "running 'yum install curl' or 'apt install curl'";
+fi;
+
+## install nvm 
+if [ ! -d "$HOME/.nvm" ];then
+    echo "install node version manager"
+    unalias curl
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+fi
+
