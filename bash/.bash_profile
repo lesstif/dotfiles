@@ -1,5 +1,5 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:usr/local/bin:$PATH";
+export PATH="$HOME/bin:/usr/local/bin:$PATH";
 export PATH=$PATH:$HOME/.composer/vendor/bin/:$HOME/.config/composer/vendor/bin
 
 export JAVA_HOME=/usr/java/jdk1.8
