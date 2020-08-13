@@ -3,7 +3,7 @@
 ## check whether stow installed.
 URL="http://ftp.gnu.org/gnu/stow/stow-2.2.2.tar.gz"
 
-if [ ! -x "/usr/local/bin/stow" ] && [ ! -x "/usr/bin/stow" ];then
+if ! command -v "stow" &> /dev/null; then  
     echo "stow not found."
     echo "downloading from $URL now..";
     wget $URL;
