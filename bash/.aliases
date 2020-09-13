@@ -137,3 +137,6 @@ alias vssh=vassh
 alias wpdf=wkhtmltopdf
 alias wimage=wkhtmltoimage
 alias wimg=wimage
+
+## 
+alisa tldr='tldr -t ocean $*'
