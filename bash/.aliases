@@ -139,4 +139,4 @@ alias wimage=wkhtmltoimage
 alias wimg=wimage
 
 ## 
-alisa tldr='tldr -t ocean $*'
+alias tldr='tldr -t ocean $*'
