@@ -21,6 +21,8 @@ export LD_LIBRARY_PATH=${PY27}/lib:${LD_LIBRARY_PATH}
 PY35=/usr/local/python3.5/
 export PATH=$PATH:${PY35}/bin
 export LD_LIBRARY_PATH=${PY35}/lib:$LD_LIBRARY_PATH
+## pip local path
+export PATH=$PATH:${HOME}/.local/bin
 
 ## go path
 export GOROOT=/usr/local/go
