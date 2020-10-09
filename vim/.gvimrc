@@ -23,17 +23,17 @@ if has("gui_running")
       set keymodel=startsel
        
       " set guifont=Source\ Code\ Pro:h14:cANSI:qDEFAULT
-      set guifont=JetBrains\ Mono\ Regular:h14:cANSI:qDEFAULT
+      set guifont=JetBrains\ Mono:h14:cANSI:qDEFAULT
       " set guifont=D2Coding\ ligature:h14:cHANGEUL:qDEFAULT
       set renderoptions=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 "      set guioptions-=L
       " restore Ctrl-F to Page down
       unmap <C-F>
   elseif has('gui_macvim')  
-      set guifont=JetBrains\ Mono\ Regular\ 14
+      set guifont=JetBrains\ Mono\ 14
       set antialias
   else
-      set guifont=JetBrains\ Mono\ Regular\ 14
+      set guifont=JetBrains\ Mono\ 14
       "set guifont=Consolas:h10
   endif
   " Turn off toolbar
