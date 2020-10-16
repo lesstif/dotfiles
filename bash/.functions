@@ -221,3 +221,7 @@ function jdk6 {
     export PATH=$JAVA_HOME/bin:$PATH
     java -version
 }
+
+function pip {
+    pip3 install "$@" --user
+}
