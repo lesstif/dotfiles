@@ -142,4 +142,4 @@ alias wimg=wimage
 alias tldr='tldr -t ocean $*'
 
 ## python
-alias pip='pip3 $*'
+## alias pip='pip3 $*'
