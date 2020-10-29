@@ -336,7 +336,13 @@ filetype plugin indent on    " required
 
 "set background=dark
 colorscheme solarized
-set background=dark
+"set background=light
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
 let g:solarized_termcolors= 256
 let g:solarized_contrast  = "high"
 
