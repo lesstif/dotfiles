@@ -12,11 +12,11 @@ map! <S-Insert> <MiddleMouse>
 " Who needs .gvimrc?
 if has("gui_running")
   set encoding=utf-8  
+
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
   
-  if has('win32')
-      source $VIMRUNTIME/mswin.vim
-      behave mswin
-      
+  if has('win32')     
       " Prevent CTRL-F to abort the selection (in visual mode)
       " This is caused by $VIM/_vimrc ':behave mswin' which sets 'keymodel' to
       " include 'stopsel' which means that non-shifted special keys stop selection.
