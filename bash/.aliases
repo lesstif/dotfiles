@@ -123,10 +123,6 @@ alias bitcoin-cli2='bitcoin-cli -regtest $*'
 ## for laravel alias
 alias art='php artisan'
 
-## 
-export GOPATH=${HOME}/devel/gopath
-export PATH=$PATH:$GOPATH/bin
-
 ## vagrant
 alias up='pushd .; cd ~/Homestead; vagrant up;popd'
 alias halt='pushd .; cd ~/Homestead; vagrant halt;popd'
