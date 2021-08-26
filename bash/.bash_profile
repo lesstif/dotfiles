@@ -88,3 +88,6 @@ stty stop ''
 
 ## terminal ls color settings
 eval `dircolors $HOME/.dircolors`
+
+## sdk man init
+source "/home/lesstif/.sdkman/bin/sdkman-init.sh"
