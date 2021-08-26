@@ -1,17 +1,3 @@
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:/usr/local/bin:$PATH";
-export PATH=$PATH:$HOME/.composer/vendor/bin/:$HOME/.config/composer/vendor/bin
-
-if [ -d /usr/java/jdk1.8 ]; then
-	export JAVA_HOME=/usr/java/jdk1.8
-elif [ -d /usr/java/jdk11 ]; then
-	export JAVA_HOME=/usr/java/jdk11
-elif  [ -d /usr/lib/jvm/default-java ]; then
-	export JAVA_HOME=/usr/lib/jvm/default-java	
-fi
-
-export PATH=$JAVA_HOME/bin:$PATH
-
 ## Detect OS TYPE
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     OS="linux"
