@@ -225,3 +225,7 @@ function jdk6 {
 function pip {
     pip3 install "$@" --user
 }
+
+function bat_tail {
+    tail -f "$@" | bat --paging=never -l log
+}
