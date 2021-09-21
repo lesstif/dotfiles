@@ -77,3 +77,8 @@ eval `dircolors $HOME/.dircolors`
 
 ## sdk man init
 source "/home/lesstif/.sdkman/bin/sdkman-init.sh"
+
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    eval `ssh-agent -s`
+    ssh-add
+fi
