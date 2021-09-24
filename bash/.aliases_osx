@@ -55,7 +55,7 @@ alias plistbuddy="/usr/libexec/PlistBuddy"
 
 # Airport CLI alias
 #alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
-alias airport="/Users/lesstif/github/airport-bssid/Build/airport-bssid $*"
+alias airport="${HOME}/github/airport-bssid/Build/airport-bssid $*"
 
 ## connect wifi using bssid(for today's coffee)
 alias bssid="airport en1 00:08:9f:fc:20:b0 $*"

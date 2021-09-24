@@ -76,7 +76,7 @@ stty stop ''
 eval `dircolors $HOME/.dircolors`
 
 ## sdk man init
-source "/home/lesstif/.sdkman/bin/sdkman-init.sh"
+source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`

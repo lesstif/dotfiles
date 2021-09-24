@@ -4,36 +4,41 @@ Linux와 OS X 용 닷파일. Windows 용은 [dotfiles-windows](https://github.co
 
 ## 사전 준비
 
-[GNU stow](https://www.gnu.org/software/stow/) 가 필요하므로 OS 에 맞게 설치
+### GNU stow
 
-### Ubuntu
+[GNU stow](https://www.gnu.org/software/stow/) 가 필요하며 ansible playbook 에서 설치함.
+수동 설치일 경우 직접 다운로드후 설치
 
-```sh
-sudo apt-get install stow
+### ansible 설치
+
+automation 도구인 ansible 설치
+
+```bash
+pip install ansible
 ```
 
-### OS X
+설치 확인
 
-```sh
-brew install stow
-```
-    
-### RHEL/CentOS
-
-```sh
-sudo yum install stow
+```bash
+ansible --version
 ```
 
-### 직접 설치(Amazon Lunux 등)
+## ansible 로 dotfiles 설치
 
-```sh 
-wget http://ftp.gnu.org/gnu/stow/stow-2.2.2.tar.bz2 
-tar xjvf stow-2.2.2.tar.bz2 
-cd stow-2.2.2/ 
-./configure && make install
-```
+1. ansible playbook 저장소 복제
 
-## dotfiles 설치
+    ```sh
+    git clone https://github.com/lesstif/ansible-playbooks.git
+    cd ansible-playbooks
+    ```
+
+2. playbook 실행
+
+    ```sh
+    ansible-playbook install-dotfiles.yml
+    ```
+
+## 수동으로 dotfiles 설치
 
 1. 저장소 복제
 

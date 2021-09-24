@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
 
-## check whether stow installed.
-STOW="stow-2.3.1"
-
-URL="http://ftp.gnu.org/gnu/stow/${STOW}.tar.gz"
-
-if ! command -v "stow" &> /dev/null; then 
-    echo "stow not found."
-    echo "downloading from $URL now..";
-    wget $URL;
-    tar zxvf ${STOW}.tar.gz;
-    cd ${STOW};
-    ./configure && make;
-
-    echo "";
-    echo "YOU MUST RUN \"make install\" COMMAND AS ROOT";
-    exit 0;
-fi;
-
-
 force=0
 uninst=0
 
@@ -52,15 +33,6 @@ elif [ ! -d "$HOME/dotfiles" ] || [ $force ]; then
 
     # install GNU stow
 
-    ## Ubuntu 
-    #### sudo apt-get install stow
-
-    ## OS X
-    #### brew install stow
-
-    ## Cent OS
-    ##### sudo yum install stow
-
     ## backup
     BD=${HOME}/old-dotfiles
     if [ ! -d "$BD" ] ; then
@@ -89,13 +61,6 @@ fi
 ## ignore error
 vim -E -s -u ~/.vimrc +PluginInstall +qall
 
-## install curl
-CURL=$(which curl)
-if [ ! -x ${CURL} ];then
-    echo "curl not found";
-    echo "running 'yum install curl' or 'apt install curl'";
-fi;
-
 ## install nvm 
 if [ ! -d "$HOME/.nvm" ];then
     echo "install node version manager"
@@ -103,3 +68,9 @@ if [ ! -d "$HOME/.nvm" ];then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 fi
 
+## install sdk man
+if [ ! -d "$HOME/.sdkman" ];then
+    echo "install SDK man"
+    unalias curl
+    curl -s https://get.sdkman.io | bash
+fi
