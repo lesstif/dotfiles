@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
 ## check whether stow installed.
-URL="http://ftp.gnu.org/gnu/stow/stow-2.2.2.tar.gz"
+STOW="stow-2.3.1"
 
-if ! command -v "stow" &> /dev/null; then  
+URL="http://ftp.gnu.org/gnu/stow/${STOW}.tar.gz"
+
+if ! command -v "stow" &> /dev/null; then 
     echo "stow not found."
     echo "downloading from $URL now..";
     wget $URL;
-    tar zxvf stow-2.2.2.tar.gz;
-    cd stow-2.2.2;
+    tar zxvf ${STOW}.tar.gz;
+    cd ${STOW};
     ./configure && make;
-    
+
     echo "";
     echo "YOU MUST RUN \"make install\" COMMAND AS ROOT";
     exit 0;
@@ -84,7 +86,8 @@ if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ];then
     echo "install vim plugins"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
-vim +PluginInstall +qall
+## ignore error
+vim -E -s -u ~/.vimrc +PluginInstall +qall
 
 ## install curl
 CURL=$(which curl)
