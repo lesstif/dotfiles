@@ -36,7 +36,7 @@ if has("gui_running")
       " restore Ctrl-F to Page down
       unmap <C-F>
   elseif has('gui_macvim')  
-      set guifont=JetBrains\ Mono\ 16
+      set guifont=JetBrains\ Mono:h16
       set antialias
   else
       set guifont=JetBrains\ Mono\ 16
