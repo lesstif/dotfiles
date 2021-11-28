@@ -38,6 +38,9 @@ if has("gui_running")
   elseif has('gui_macvim')  
       set guifont=JetBrains\ Mono:h16
       set antialias
+  elseif has('gui_gtk3')
+      " set guifont=Ubuntu\ Mono\ 15
+      set guifont=JetBrains\ Mono:h16
   else
       set guifont=JetBrains\ Mono\ 16
       "set guifont=Consolas:h10
