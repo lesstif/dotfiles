@@ -78,3 +78,6 @@ alias jdk6="export JAVA_HOME=$JAVA6 && export PATH=$JAVA_HOME:$PATH"
 
 ## for MacVim 
 alias gvim="/Applications/MacVim.app/Contents/MacOS/Vim -g"
+
+## convert OSX's NFD(Normalization Form canonicalization Decomposition) to NFC(D(Normalization Form canonicalization Composition)
+alias osxtowin="convmv -r -f utf8 -t utf8 --nfc --notest $*"
