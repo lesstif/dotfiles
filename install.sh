@@ -16,7 +16,7 @@ while getopts $PARAM opt; do
     esac
 done
 
-DIRS="apprc bash git readline vim zsh"
+DIRS="apprc bash git readline vim zsh nvim ghostty"
 
 if [ $uninst -eq 1 ];then
     for i in ${DIRS}; do

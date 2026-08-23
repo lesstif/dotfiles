@@ -150,3 +150,30 @@ vim.keymap.set("n", "<space>fS", function()
   require("telescope.builtin").lsp_workspace_symbols()
 end, {})
 
+-- Cursor color
+vim.opt.termguicolors = true  -- 이게 없으면 OSC 12 자체가 안 나감
+
+vim.opt.guicursor = table.concat({
+  "n-v-c:block-Cursor",
+  "i-ci-ve:ver25-Cursor",
+  "r-cr:hor20-Cursor",
+  "o:hor50-Cursor",
+  "a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
+}, ",")
+
+vim.cmd.colorscheme("solarized")
+
+vim.api.nvim_set_hl(0, "Cursor", { fg = "#fdf6e3", bg = "#cb4b16" })
+
+-- Tab
+vim.opt.tabstop = 4       -- 탭 문자 하나가 화면에서 차지하는 폭
+vim.opt.shiftwidth = 4    -- >>, << 같은 자동 들여쓰기 폭
+vim.opt.softtabstop = 4   -- Tab/Backspace 키 누를 때 이동하는 칸 수
+vim.opt.expandtab = true  -- Tab 키 입력 시 실제로는 space로 변환 (탭 문자 대신)
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "make",
+  callback = function()
+    vim.opt_local.expandtab = false
+  end,
+})
