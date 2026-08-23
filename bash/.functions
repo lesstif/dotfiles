@@ -225,3 +225,7 @@ function jdk6 {
 function bat_tail {
     tail -f "$@" | bat --paging=never -l log
 }
+
+neovide() {
+  command neovide "$@" > /dev/null 2>&1 &
+}

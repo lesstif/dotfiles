@@ -69,8 +69,7 @@ elif [[ "$OSTYPE" == "win32" ]]; then
     OS="win32"
 fi
 
-for file in
-    ~/.{path,exports,exports_local,aliases,aliases_${OS},aliases_local,functions,functions_${OS},functions_local}; do
+for file in ~/.{path,exports,exports_local,aliases,aliases_${OS},aliases_local,functions,functions_${OS},functions_local}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

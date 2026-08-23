@@ -82,3 +82,15 @@ if [ -z "$SSH_AUTH_SOCK" ] ; then
     eval `ssh-agent -s`
     ssh-add
 fi
+. "$HOME/.cargo/env"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/lesstif/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+. "$HOME/.local/bin/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/lesstif/.local/bin:$PATH"
