@@ -21,7 +21,8 @@ require("lazy").setup({
     priority = 1000,
     config = function()
       vim.o.termguicolors = true
-      vim.o.background = "dark"
+      vim.o.background = "light"
+      require("solarized").setup({})
       vim.cmd.colorscheme("solarized")
     end,
   },
@@ -164,7 +165,6 @@ vim.opt.guicursor = table.concat({
   "a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",
 }, ",")
 
-vim.cmd.colorscheme("solarized")
 
 vim.api.nvim_set_hl(0, "Cursor", { fg = "#fdf6e3", bg = "#cb4b16" })
 
