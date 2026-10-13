@@ -122,9 +122,25 @@ plugins = []
         result = self.shell("print clean")
         self.assertEqual("clean\n", result.stdout)
         self.assertEqual("", result.stderr)
-        self.assertFalse(any("source " in line for line in
-                             (self.home / ".zshrc").read_text().splitlines()
-                             if not line.startswith("#")))
+        rc = (self.home / ".zshrc").read_text()
+        self.assertNotIn('source "$ZSH/oh-my-zsh.sh"', rc)
+        self.assertNotIn('source "$NVM_DIR/nvm.sh"', rc)
+        self.assertNotIn('source "$SDKMAN_DIR/bin/sdkman-init.sh"', rc)
+
+    def test_restored_aliases_and_colors_load_after_framework(self):
+        omz = self.home / ".oh-my-zsh"
+        omz.mkdir()
+        (omz / "oh-my-zsh.sh").write_text("export LS_COLORS=framework-colors\n")
+        self.chezmoi("apply")
+        self.assertTrue((self.home / ".aliases").is_file())
+        self.assertTrue((self.home / ".dircolors").is_file())
+        result = self.shell("alias week; alias wpdf; alias gi-java; print -r -- $LS_COLORS")
+        self.assertEqual("", result.stderr)
+        self.assertIn("date +%V", result.stdout)
+        self.assertIn("wkhtmltopdf", result.stdout)
+        self.assertIn("eclipse,java", result.stdout)
+        self.assertIn("di=34", result.stdout)
+        self.assertNotIn("framework-colors", result.stdout)
 
     def test_machine_environment_overrides_framework_environment(self):
         omz = self.home / ".oh-my-zsh"

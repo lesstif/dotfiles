@@ -8,8 +8,9 @@ macOS와 Linux용 설정입니다. Zsh를 기준으로 chezmoi가 실제 설정 
 `.chezmoiroot`가 `chezmoi/`를 배포 원본으로 지정합니다. 저장소 최상위의
 Bash, Windows, Brewfile, `.macos`, 옛 설치 스크립트는 배포하지 않습니다.
 
-Zsh는 `.exports`, `.aliases`, `.functions` 또는 `*_local` 파일을 읽지 않습니다.
-원본을 항목별로 나누되, chezmoi가 **하나의 `.zshrc`**로 합칩니다.
+Zsh 환경과 함수는 항목별 템플릿을 하나의 `.zshrc`로 합칩니다.
+별칭은 chezmoi가 생성한 `.aliases`를 한 번만 명시적으로 읽습니다.
+`.exports`, `.functions` 또는 `*_local` 파일은 읽지 않습니다.
 
 | 원본 | 역할 |
 | --- | --- |
@@ -17,7 +18,9 @@ Zsh는 `.exports`, `.aliases`, `.functions` 또는 `*_local` 파일을 읽지 �
 | `.chezmoitemplates/zsh/environment.zsh.tmpl` | 기본 환경변수와 중복 없는 PATH |
 | `.chezmoitemplates/zsh/framework.zsh.tmpl` | Oh My Zsh 또는 기본 완성·프롬프트 |
 | `.chezmoitemplates/zsh/runtimes.zsh.tmpl` | 설치된 nvm·SDKMAN의 선택적 초기화 |
-| `.chezmoitemplates/zsh/commands.zsh.tmpl` | 공통·OS별 명령, 마지막으로 기기별 값 |
+| `.chezmoitemplates/zsh/commands.zsh.tmpl` | 함수·색상 초기화·별칭 로딩, 마지막으로 기기별 값 |
+| `chezmoi/dot_aliases.tmpl` | 기존 공통 별칭과 OS별 별칭 |
+| `chezmoi/dot_dircolors` | GNU ls 색상표 |
 | `~/.config/chezmoi/chezmoi.toml` | 해당 컴퓨터의 데이터; Git에 넣지 않음 |
 
 위 템플릿 경로는 `chezmoi/`를 기준으로 합니다.
@@ -79,7 +82,10 @@ Git, Neovim, Ghostty, tmux, screen, readline 설정도 함께 배포합니다.
 Ghostty는 공통 XDG 경로인 `~/.config/ghostty/config`를 사용합니다. macOS의
 기존 `~/Library/Application Support/com.mitchellh.ghostty/config`도 있으면
 별도로 백업하고 내용을 통합하세요. 양쪽 파일의 설정이 중복되지 않게 합니다.
-Neovim 플러그인 설치는 기존 lazy.nvim 설정이 담당합니다.
+Neovim은 0.12 이상을 기준으로 합니다. Treesitter는 `main`의 새 API를 사용하며,
+C 컴파일러와 tree-sitter CLI 0.26.1 이상이 필요합니다. 파서 설치는 비동기로
+실행되므로 첫 설치가 끝난 뒤 파일을 다시 열면 구문 강조가 적용됩니다.
+Neovim 플러그인 설치는 lazy.nvim 설정이 담당합니다.
 Vundle이 필요한 옛 Vim 설정과 기타 설치 스크립트는 자동으로 배포·실행하지 않습니다.
 
 ## 기기별 설정
@@ -136,13 +142,16 @@ PATH는 `extra_path`로 조정합니다. 플러그인과 경로 목록은 지정
    설정 등)도 링크가 해제되므로 필요하면 개별적으로 chezmoi에 추가하거나 복원합니다.
 5. `chezmoi apply` 후 새 터미널에서 확인합니다.
 
-Bash는 새 구조의 의존성이 아닙니다. 기존 Tomcat·Java·PHP·Vagrant 등 환경별
-명령은 옛 파일에 보존했으며 필요한 것만 새 템플릿이나 기기 데이터로 옮깁니다.
+Bash는 새 구조의 의존성이 아닙니다. 기존 `.aliases`의 공통 명령은
+`dot_aliases.tmpl`에 옮겼고, macOS 명령은 macOS에서만 생성합니다.
+로그 경로는 `MY_WAS`·`CONFLUENCE_DIR` 환경변수로 조정할 수 있습니다.
 `install.sh.mac`, `.macos`, 예전 Brewfile은 이번 설치에 사용하지 않습니다.
 
 ## 일상적인 변경
 
-Zsh 생성 결과 대신 `.chezmoitemplates/zsh/`의 원본을 수정합니다.
+Zsh 생성 결과 대신 `chezmoi/.chezmoitemplates/zsh/`의 원본을 수정합니다.
+별칭은 `chezmoi/dot_aliases.tmpl`, 색상표는 `chezmoi/dot_dircolors`를 수정합니다.
+이 경로들은 저장소 최상위를 기준으로 합니다.
 
 ```sh
 chezmoi cd

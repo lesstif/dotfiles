@@ -26,17 +26,31 @@ require("lazy").setup({
     end,
   },
 
-  -- Syntax highlighting
+  -- Neovim 0.12+ and the rewritten Treesitter API.
   {
     "nvim-treesitter/nvim-treesitter",
-    -- The main branch is an incompatible rewrite; this config uses the legacy API.
-    branch = "master",
+    branch = "main",
     lazy = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua", "python", "javascript", "vim", "vimdoc" },
-        highlight = { enable = true },
+      local languages = { "lua", "python", "javascript", "vim", "vimdoc" }
+      local treesitter = require("nvim-treesitter")
+      treesitter.setup({})
+      treesitter.install(languages)
+
+      local filetypes = {
+        lua = "lua", python = "python", javascript = "javascript",
+        vim = "vim", help = "vimdoc",
+      }
+      vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+        group = vim.api.nvim_create_augroup("DotfilesTreesitter", { clear = true }),
+        callback = function(args)
+          local language = filetypes[vim.bo[args.buf].filetype]
+          if language then
+            -- Installation is asynchronous; buffers still work before a parser is ready.
+            pcall(vim.treesitter.start, args.buf, language)
+          end
+        end,
       })
     end,
   },
