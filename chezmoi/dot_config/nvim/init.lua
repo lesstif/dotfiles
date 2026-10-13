@@ -29,6 +29,9 @@ require("lazy").setup({
   -- Syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
+    -- The main branch is an incompatible rewrite; this config uses the legacy API.
+    branch = "master",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
