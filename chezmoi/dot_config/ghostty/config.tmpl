@@ -16,11 +16,26 @@ keybind = ctrl+d=text:\x04
 #keybind = ctrl+physical:d=unbind
 
 # Empty values reset the configuration to the default value
+{{ if eq .chezmoi.os "darwin" }}
 font-family = "JetBrains Mono"
-font-size = 20
+{{ else }}
+font-family = "JetBrains Mono Regular"
+{{ end }}
+font-size = 18
 
 # cursor-color 를 아예 지정하지 않거나, 지정하려면 동적으로 따라가게
 cursor-color = cell-foreground
 
 # 셸 통합이 프롬프트에서 커서 모양/색을 강제로 바꾸는 걸 방지
 shell-integration-features = no-cursor
+
+# Windows size
+{{ if eq .chezmoi.os "darwin" }}
+window-save-state = always
+{{ else }}
+window-width = 100
+window-height = 40
+{{ end }}
+font-size = 18
+
+

@@ -15,3 +15,6 @@ autoload -Uz compinit
 compinit
 PROMPT='%n@%m:%~%# '
 {{ end }}
+if (( $+commands[chezmoi] )); then
+  source <(chezmoi completion zsh)
+fi
