@@ -1,0 +1,60 @@
+# 4. Common commands. Detect GNU tools rather than assuming Linux has gls.
+if (( $+commands[gls] )); then
+  alias ls='gls --color=auto'
+elif command ls --color=auto -d . >/dev/null 2>&1; then
+  alias ls='ls --color=auto'
+else
+  alias ls='ls -G'
+fi
+alias l='ls -lF'
+alias la='ls -laF'
+alias lsd="ls -lF | grep '^d'"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias dl='cd ~/Downloads'
+alias dt='cd ~/Desktop'
+alias p='cd ~/projects'
+alias g=git
+alias vi=vim
+alias cls=clear
+alias reload='exec zsh -l'
+alias sudo='sudo '
+alias art='php artisan'
+alias h='http --follow'
+# Functions preserve arguments instead of expanding $* when defining aliases.
+function claude() { command claude -c "$@"; }
+function curl-downloader() { command curl -C - -O "$@"; }
+function mkd() { mkdir -p -- "$1" && cd -- "$1"; }
+function v() { command vim "${@:-.}"; }
+function path() { print -rl -- $path; }
+function server() { command python3 -m http.server "${1:-8000}"; }
+function gi() { command curl -fsSL "https://www.toptal.com/developers/gitignore/api/$1"; }
+function bat_tail() { command tail -f "$@" | command bat --paging=never -l log; }
+function neovide() { command neovide "$@" >/dev/null 2>&1 & }
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS-only commands.
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias localip='ipconfig getifaddr en0'
+alias c="tr -d '\n' | pbcopy"
+alias cleanup="find . -type f -name '*.DS_Store' -print -delete"
+alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
+function o() { command open "${@:-.}"; }
+function cdf() { cd -- "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')"; }
+{{ else if eq .chezmoi.os "linux" -}}
+function o() { command xdg-open "${1:-.}"; }
+{{ end -}}
+# 5. Machine values have the final say; no *_local files are sourced.
+{{ range $key, $value := .shell.env -}}
+{{ if or (not (regexMatch "^[A-Za-z_][A-Za-z0-9_]*$" $key)) (has $key (list "PATH" "HOME" "ZDOTDIR" "ZSH" "NVM_DIR" "SDKMAN_DIR" "BUN_INSTALL")) }}
+{{ fail (printf "shell.env: %s is invalid or reserved; use shell.extra_path for PATH" $key) }}
+{{ end -}}
+export {{ $key }}={{ $value | shellQuote }}
+{{ end }}
+
+{{ range $key, $value := .shell.aliases -}}
+alias {{ $key | shellQuote }}={{ $value | shellQuote }}
+{{ end }}

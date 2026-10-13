@@ -1,0 +1,17 @@
+# 2. Framework. Personal aliases are defined AFTER Oh My Zsh.
+{{ if .shell.use_oh_my_zsh -}}
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME={{ .shell.theme | shellQuote }}
+plugins=({{ range .shell.plugins }}{{ . | shellQuote }} {{ end }})
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
+else
+  autoload -Uz compinit
+  compinit
+  PROMPT='%n@%m:%~%# '
+fi
+{{ else -}}
+autoload -Uz compinit
+compinit
+PROMPT='%n@%m:%~%# '
+{{ end }}
