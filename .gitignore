@@ -1,3 +1,7 @@
 ## ignore vim backup files
 *~
 *.swp
+
+# Local Python test artifacts
+__pycache__/
+*.pyc

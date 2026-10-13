@@ -1,0 +1,16 @@
+# 3. Optional runtimes. Only source installed tools; never install on startup.
+{{ if .shell.use_nvm -}}
+export NVM_DIR="$HOME/.nvm"
+[[ ! -r "$NVM_DIR/nvm.sh" ]] || source "$NVM_DIR/nvm.sh"
+{{ end -}}
+{{ if .shell.use_sdkman -}}
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ ! -r "$SDKMAN_DIR/bin/sdkman-init.sh" ]] || source "$SDKMAN_DIR/bin/sdkman-init.sh"
+{{ end -}}
+# Rust needs its bin directory, not another PATH-mutating startup script.
+# Keep explicit machine paths first even after runtime initialization.
+path=( $_dotfiles_extra_path $path )
+unset _dotfiles_extra_path
+if [[ -t 1 ]] && (( $+commands[tty] )); then
+  export GPG_TTY="$(tty)"
+fi

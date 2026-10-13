@@ -1,0 +1,27 @@
+# 1. Environment. Preserve inherited paths and remove duplicate entries.
+typeset -U path PATH
+_dotfiles_extra_path=(
+{{- range .shell.extra_path }}
+  {{ . | shellQuote }}
+{{- end }}
+)
+path=(
+  $_dotfiles_extra_path
+  "$HOME/bin" "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.bun/bin"
+  "$HOME/.composer/vendor/bin" "$HOME/.config/composer/vendor/bin"
+{{- if eq .chezmoi.os "darwin" }}
+  /opt/homebrew/bin /opt/homebrew/sbin /usr/local/bin /usr/local/sbin
+{{- end }}
+  $path
+)
+export PATH
+export EDITOR=vim VISUAL=vim
+export BUN_INSTALL="$HOME/.bun"
+export PYTHONIOENCODING=UTF-8
+export NODE_REPL_HISTORY="$HOME/.node_history"
+export NODE_REPL_HISTORY_SIZE=32768
+export HISTFILE="$HOME/.zsh_history"
+HISTSIZE=32768
+SAVEHIST=32768
+setopt APPEND_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
+export LESS=-R

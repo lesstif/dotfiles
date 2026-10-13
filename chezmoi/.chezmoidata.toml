@@ -1,0 +1,14 @@
+[defaults.shell]
+theme = "robbyrussell"
+plugins = ["git", "docker"]
+extra_path = []
+use_oh_my_zsh = true
+use_nvm = true
+use_sdkman = true
+
+[defaults.shell.env]
+[defaults.shell.aliases]
+
+[defaults.git]
+name = "KwangSeob Jeong"
+email = "lesstif@gmail.com"
