@@ -147,7 +147,7 @@ install_linux arch
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.log().strip(), "pacman -Syu --needed git curl zsh chezmoi")
 
-    def test_debian_installs_chezmoi_into_user_bin(self):
+    def test_ubuntu_installs_chezmoi_into_user_bin(self):
         result = self.run_script(script='''
 work_dir="$HOME/work"; mkdir "$work_dir"
 command() { if [ "$*" = "-v chezmoi" ]; then return 1; else builtin command "$@"; fi; }
@@ -156,12 +156,47 @@ curl() {
   printf '%s\\n' "$*" >> "$LOG"
   printf 'printf "installer %%s\\\\n" "$*" >> "$LOG"\\n' > "$work_dir/chezmoi.sh"
 }
-install_linux debian
+install_linux ubuntu
 ''')
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("apt-get update", self.log())
         self.assertIn("apt-get install -y ca-certificates curl git zsh", self.log())
         self.assertIn(f"installer -b {self.home}/.local/bin", self.log())
+
+    def test_detects_ubuntu_and_arch_from_os_release(self):
+        fixture = self.home / "os-release"
+        for distro in ("ubuntu", "arch"):
+            with self.subTest(distro=distro):
+                fixture.write_text(f'NAME="Test Linux"\nID={distro}\n')
+                result = self.run_script(script='detect_linux_distro "$HOME/os-release"')
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stdout.strip(), distro)
+
+    def test_unsupported_and_missing_linux_ids_are_rejected(self):
+        fixture = self.home / "os-release"
+        for data in ("ID=debian\n", "ID=fedora\n", 'NAME="Unknown Linux"\n'):
+            with self.subTest(data=data):
+                fixture.write_text(data)
+                result = self.run_script(script='detect_linux_distro "$HOME/os-release"')
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("Supported: Ubuntu, Arch Linux", result.stderr)
+                self.assertEqual(self.log(), "")
+
+    def test_linux_main_routes_to_distro_installer(self):
+        self.command("uname", "echo Linux")
+        for distro in ("ubuntu", "arch"):
+            with self.subTest(distro=distro):
+                result = self.run_script(distro, script='''
+detect_linux_distro() { printf '%s' "$TEST_DISTRO"; }
+install_linux() { printf 'install_linux %s\\n' "$1" >> "$LOG"; }
+TEST_DISTRO="$2"
+main --apply --skip-oh-my-zsh
+''')
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn(f"install_linux {distro}", self.log())
+                self.assertIn("chezmoi apply", self.log())
+                self.assertNotIn("brew", self.log())
+                (self.root / "log").unlink()
 
     def test_macos_installs_only_missing_tools(self):
         self.command("brew", 'echo "brew $*" >> "$LOG"')
