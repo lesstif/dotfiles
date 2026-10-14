@@ -39,7 +39,60 @@ PATH는 상속받은 항목을 유지하고 Zsh의 `path` 배열로 중복을 �
 
 ## 설치
 
-먼저 Zsh와 chezmoi를 설치합니다.
+### 새 OS에서 자동 준비
+
+`bootstrap.sh`는 macOS, Ubuntu/Debian, Arch Linux를 지원합니다.
+Git·curl·Zsh·chezmoi를 준비하고 Oh My Zsh를 설치한 뒤, 새 컴퓨터라면
+이 저장소를 `chezmoi init`으로 받아옵니다. macOS에 Homebrew가 없으면
+공식 설치 프로그램을 실행합니다. Ubuntu/Debian의 chezmoi는 공식 설치
+프로그램으로 `~/.local/bin`에 설치합니다.
+
+Git이나 chezmoi가 아직 없는 컴퓨터에서도 브라우저로 이 저장소의
+`bootstrap.sh`를 다운로드한 뒤 실행할 수 있습니다. curl이 있다면:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/lesstif/dotfiles/main/bootstrap.sh -o bootstrap.sh
+nvim bootstrap.sh                     # 내용 확인
+bash bootstrap.sh                     # 도구 설치 + 설정 diff
+bash bootstrap.sh --apply             # diff 확인 후 설정 적용
+exec zsh -l
+```
+
+한 번에 적용하고 기본 로그인 셸도 Zsh로 바꾸려면:
+
+```sh
+bash bootstrap.sh --apply --change-shell
+```
+
+| 옵션 | 동작 |
+| --- | --- |
+| 기본 실행 | 도구 설치, Oh My Zsh 준비, 새 원본 초기화, `chezmoi diff` |
+| `--apply` | diff 표시 대신 `chezmoi apply` 실행 |
+| `--change-shell` | `chsh`로 로그인 셸 변경; 필요하면 `/etc/shells` 등록 |
+| `--skip-oh-my-zsh` | Oh My Zsh 설치 생략 |
+| `--repo URL` | 새 컴퓨터에서 초기화할 저장소 변경; 기존 원본은 유지 |
+
+일반 사용자로 실행하세요. 시스템 패키지 설치에만 sudo를 사용하며,
+Homebrew·패키지 관리자·chsh가 비밀번호나 확인을 요청할 수 있습니다.
+Arch에서는 부분 업그레이드를 피하려고 `pacman -Syu --needed`를 사용하므로,
+필수 도구가 없으면 **시스템 전체 업그레이드도 진행**합니다.
+
+재실행하면 기존 Oh My Zsh와 chezmoi 원본을 유지합니다. Oh My Zsh 설치는
+`.zshrc`를 생성하거나 덮어쓰지 않습니다. 설정 변경은 `--apply` 또는 이후의
+`chezmoi apply` 단계에서 처리합니다. `--repo`는 기존 저장소를 교체하지 않으며,
+기존 원본의 변경사항을 가져오려면 `chezmoi update`를 별도로 사용하세요.
+이 스크립트는 실행한 체크아웃이 아니라 **chezmoi의 설정된 원본**을 사용합니다.
+현재 체크아웃을 직접 적용하려면 아래 `install.sh`를 사용하세요.
+
+이 스크립트는 Neovim·Ghostty·개발 언어·기존 Brewfile의 앱까지 설치하지는 않습니다.
+Windows에서는 실행하지 않습니다. Windows는 Zsh/WSL 대신 기존 PowerShell
+환경을 사용하며, 현재 저장소의 Unix 설정 배포와는 별도로 준비해야 합니다.
+설치 작업은 명시적으로 이 스크립트를 실행할 때만 수행되며, 터미널을 열거나
+일반 `chezmoi apply`를 실행할 때 자동으로 패키지를 설치하지 않습니다.
+
+### 수동 설치와 현재 체크아웃 적용
+
+직접 준비하려면 먼저 Zsh와 chezmoi를 설치합니다.
 
 ```sh
 # macOS
@@ -171,7 +224,9 @@ chezmoi, Zsh, Git, Python 3을 준비하고 실행합니다.
 python3 -m unittest discover -s tests -v
 ```
 
-테스트는 임시 홈에서 적용·재적용의 일치, Linux 로그인·비로그인 기동,
+부트스트랩 테스트는 임시 홈과 가짜 설치 명령으로 초기화·반복 실행·설치 실패 시 중단,
+Ubuntu/Debian·Arch·macOS의 패키지 명령을 검증합니다. 실제 OS 패키지 설치는 수행하지 않습니다.
+설정 테스트는 임시 홈에서 적용·재적용의 일치, Linux 로그인·비로그인 기동,
 PATH 유지·중복 제거, 기기 데이터와 프레임워크보다 우선하는 사용자 설정,
 GNU/BSD `ls`, 비대화형 기동, macOS 생성 결과의 구문을 확인합니다.
 macOS 실기기와 외부 플러그인의 실제 호환성은 별도 확인이 필요합니다.
