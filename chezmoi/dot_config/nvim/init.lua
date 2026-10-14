@@ -127,7 +127,7 @@ require("lazy").setup({
 
 -- OS별 GUI 폰트: 실제 설치된 폰트 패밀리 이름으로 지정
 local fonts = {
-  mac = "JetBrainsMono",
+  mac = "JetBrains Mono",
   windows = "JetBrainsMono",
   linux = "JetBrains Mono",
 }
