@@ -1,0 +1,3 @@
+{{ if eq .chezmoi.os "darwin" }}
+neovim-bin = {{ lookPath "nvim" | quote }}
+{{ end }}
