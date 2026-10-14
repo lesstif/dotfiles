@@ -118,15 +118,31 @@ require("lazy").setup({
   -- Git signs in the gutter
   {
     "lewis6991/gitsigns.nvim",
-    config = function()vim.o.guifont = "JetBrainsMono Nerd Font:h14"
+    config = function()
       require("gitsigns").setup({})
     end,
   },
 
 })
 
---
-vim.o.guifont = "JetBrainsMono Nerd Font:h18"
+-- OS별 GUI 폰트: 실제 설치된 폰트 패밀리 이름으로 지정
+local fonts = {
+  mac = "JetBrainsMono",
+  windows = "JetBrainsMono",
+  linux = "JetBrains Mono",
+}
+
+local font
+if vim.fn.has("macunix") == 1 then
+  font = fonts.mac
+elseif vim.fn.has("win32") == 1 then
+  font = fonts.windows
+else
+  font = fonts.linux
+end
+
+local font_size = 18
+vim.o.guifont = string.format("%s:h%d", font, font_size)
 
 ---- Enable system clipboard integration
 vim.opt.clipboard = "unnamedplus"
