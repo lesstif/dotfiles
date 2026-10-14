@@ -41,11 +41,20 @@ PATH는 상속받은 항목을 유지하고 Zsh의 `path` 배열로 중복을 �
 
 ### 새 OS에서 자동 준비
 
-`bootstrap.sh`는 macOS, Ubuntu/Debian, Arch Linux를 지원합니다.
+`bootstrap.sh`는 macOS, Ubuntu, Arch Linux를 지원합니다.
 Git·curl·Zsh·chezmoi를 준비하고 Oh My Zsh를 설치한 뒤, 새 컴퓨터라면
 이 저장소를 `chezmoi init`으로 받아옵니다. macOS에 Homebrew가 없으면
-공식 설치 프로그램을 실행합니다. Ubuntu/Debian의 chezmoi는 공식 설치
+공식 설치 프로그램을 실행합니다. Ubuntu의 chezmoi는 공식 설치
 프로그램으로 `~/.local/bin`에 설치합니다.
+
+| OS | 설치 방법 |
+| --- | --- |
+| macOS | Homebrew |
+| Ubuntu | apt로 Git·curl·Zsh 설치, 공식 설치 프로그램으로 chezmoi 설치 |
+| Arch Linux | pacman으로 Git·curl·Zsh·chezmoi 설치 |
+
+Linux에서는 `/etc/os-release`로 배포판을 자동 감지합니다.
+Linux 지원 대상은 Ubuntu와 Arch Linux이며, 다른 배포판에서는 설치 전에 중단합니다.
 
 Git이나 chezmoi가 아직 없는 컴퓨터에서도 브라우저로 이 저장소의
 `bootstrap.sh`를 다운로드한 뒤 실행할 수 있습니다. curl이 있다면:
@@ -225,7 +234,7 @@ python3 -m unittest discover -s tests -v
 ```
 
 부트스트랩 테스트는 임시 홈과 가짜 설치 명령으로 초기화·반복 실행·설치 실패 시 중단,
-Ubuntu/Debian·Arch·macOS의 패키지 명령을 검증합니다. 실제 OS 패키지 설치는 수행하지 않습니다.
+Ubuntu·Arch·macOS의 패키지 명령과 Linux 배포판 자동 감지를 검증합니다. 실제 OS 패키지 설치는 수행하지 않습니다.
 설정 테스트는 임시 홈에서 적용·재적용의 일치, Linux 로그인·비로그인 기동,
 PATH 유지·중복 제거, 기기 데이터와 프레임워크보다 우선하는 사용자 설정,
 GNU/BSD `ls`, 비대화형 기동, macOS 생성 결과의 구문을 확인합니다.

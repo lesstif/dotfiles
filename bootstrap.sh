@@ -8,7 +8,7 @@ usage() {
 Usage: bash bootstrap.sh [--apply] [--change-shell] [--skip-oh-my-zsh]
                          [--repo URL]
 
-Install Git, curl, Zsh, chezmoi and Oh My Zsh on macOS, Ubuntu/Debian or Arch.
+Install Git, curl, Zsh, chezmoi and Oh My Zsh on macOS, Ubuntu or Arch Linux.
 Initialize lesstif/dotfiles if chezmoi has no Git source, then show chezmoi diff.
 Existing chezmoi sources and Oh My Zsh installations are retained, not updated.
 
@@ -56,6 +56,16 @@ install_macos() {
   if [ "${#packages[@]}" -gt 0 ]; then brew install "${packages[@]}"; fi
 }
 
+detect_linux_distro() {
+  local os_release="${1:-/etc/os-release}" distro
+  [ -r "$os_release" ] || die 'Cannot detect Linux distribution.'
+  distro="$(. "$os_release"; printf '%s' "${ID:-}")"
+  case "$distro" in
+    ubuntu|arch) printf '%s\n' "$distro" ;;
+    *) die "Unsupported Linux distribution: $distro. Supported: Ubuntu, Arch Linux." ;;
+  esac
+}
+
 install_linux() {
   local distro="$1" tool missing=0
   for tool in git curl zsh chezmoi; do
@@ -63,7 +73,7 @@ install_linux() {
   done
   if [ "$missing" -eq 0 ]; then return; fi
   case "$distro" in
-    ubuntu|debian)
+    ubuntu)
       as_root apt-get update
       as_root apt-get install -y ca-certificates curl git zsh
       if ! command -v chezmoi >/dev/null 2>&1; then
@@ -124,9 +134,7 @@ main() {
   case "$platform" in
     Darwin) ;;
     Linux)
-      [ -r /etc/os-release ] || die 'Cannot detect Linux distribution.'
-      distro="$(. /etc/os-release; printf '%s' "$ID")"
-      case "$distro" in ubuntu|debian|arch) ;; *) die "Unsupported Linux distribution: $distro" ;; esac
+      distro="$(detect_linux_distro)"
       ;;
     *) die "Unsupported platform: $platform. Windows uses native PowerShell, not Zsh." ;;
   esac
