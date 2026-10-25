@@ -1,6 +1,6 @@
 # 4. User commands and file colors, after framework/runtime setup.
 # Functions preserve arguments instead of expanding $* when defining aliases.
-function claude() { command claude -c "$@"; }
+#function claude() { command claude -c "$@"; }
 function curl-downloader() { command curl -C - -O "$@"; }
 function mkd() { mkdir -p -- "$1" && cd -- "$1"; }
 function v() { command vim "${@:-.}"; }
