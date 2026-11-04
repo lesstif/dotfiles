@@ -7,6 +7,8 @@ use_nvm = true
 use_sdkman = true
 
 [defaults.shell.env]
+OLLAMA_HOST = "http://mac-mini:11434"
+
 [defaults.shell.aliases]
 
 [defaults.git]
