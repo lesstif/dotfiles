@@ -18,3 +18,7 @@ PROMPT='%n@%m:%~%# '
 if (( $+commands[chezmoi] )); then
   source <(chezmoi completion zsh)
 fi
+
+if [[ -n ${SSH_CONNECTION:-} ]]; then
+  PROMPT="%m $PROMPT"
+fi
